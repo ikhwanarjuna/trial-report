@@ -61,32 +61,31 @@ class TrialController extends Controller
     public function store(StoreTrialRequest $app)
     {
 
-        $validatedData = $app->validate([
-                'id' => 'required',
-                'document_number'     => 'required', 
-                'document_date'   => 'required',
-                'trial_type'   => 'required',
-                'trial_note'   => 'required',
-                'item_code'   => 'required',
-                'family_product'   => 'required',
-                'item_name'   => 'required',
-                'size'   => 'required',
-                'note'   => 'required',
-                'approval_created_by'   => 'required',
-                'approval_created_date'   => 'required',
-                'approval_plant_head_name'   => 'required',
-                'approval_plant_head_date'   => 'required',
-                'approval_ppic_name'   => 'required',
-                'approval_ppic_date'   => 'required',
-                'approval_gm_name'   => 'required',
-                'approval_gm_date'   => 'required',
-                'costing_approved'   => 'required',
-                'costing_staff_name'   => 'required',
-                'costing_approval_name'   => 'required',
-                'costing_approval_date'   => 'required',  
+       Trial::updateOrCreate([
+                'id' => $app->id,
+                'document_number'     => $app->document_number, 
+                'document_date'   => $app->document_date,
+                'trial_type'   => $app->trial_type,
+                'trial_note'   => $app->trial_note,
+                'item_code'   => $app->item_code,
+                'family_product'   => $app->family_product,
+                'item_name'   => $app->item_name,
+                'size'   => $app->size,
+                'note'   => $app->note,
+                'approval_created_by'   => $app->approval_created_by,
+                'approval_created_date'   => $app->approval_created_date,
+                'approval_plant_head_name'   => $app->approval_plant_head_name,
+                'approval_plant_head_date'   => $app->approval_plant_head_date,
+                'approval_ppic_name'   => $app->approval_ppic_name,
+                'approval_ppic_date'   => $app->approval_ppic_date,
+                'approval_gm_name'   => $app->approval_gm_name,
+                'approval_gm_date'   => $app->approval_gm_date,
+                'costing_approved'   => $app->costing_approved,
+                'costing_staff_name'   => $app->costing_staff_name,
+                'costing_approval_name'   => $app->costing_approval_name,
+                'costing_approval_date'   => $app->costing_approval_date,  
 
         ]);
-        Trial::create($validatedData);
 
         return response()->json(['success'=>'Data Berhasil Disimpan.']);
    }

@@ -11,28 +11,8 @@ class Trial extends Model
     use HasFactory;
     use Uuid;
 
-    protected $fillable=[
-        'id',
-        'document_number',
-        'trial_type',
-        'trial_note',
-        'item_code',
-        'family_product',
-        'item_name',
-        'size',
-        'note',
-        'approval_created_by',
-        'approval_created_date',
-        'approval_plant_head_name',
-        'approval_plant_head_date',
-        'approval_ppic_name',
-        'approval_ppic_date',
-        'approval_gm_name',
-        'approval_gm_date', 
-        'costing_approved',
-        'costing_staff_name',
-        'costing_approval_name',
-        'costing_approval_date',
+    protected $guarded=[
+        'id'
         
     ];
 
