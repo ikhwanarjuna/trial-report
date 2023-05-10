@@ -313,11 +313,11 @@
         {data:'costing_approved',name:'costing_approved'},
         {data: 'action',name:'action',orderable:false, searchable: false},
         
-      ],
+      ]
     });
 
     //button
-    $('body').on('click', '#new-data', function () {
+    $('#new-data').click(function () {
       $('#new-data-modal').modal('show');
       $('#store').val("create-data");
       $('#data-form').trigger("reset");
@@ -329,7 +329,7 @@
 
       $.ajax({
         data: $('#data-form').serialize(),
-        url: "{{ route('app.store') }}",
+        url: '/app',
         type: "POST",
         dataType: 'json',
         contentType: 'json',
@@ -348,8 +348,9 @@
     $('body').on('click', '.deleteData', function () {
      
      var product_id = $(this).data("id");
-     confirm("Apakah yakin menghapus data?");
+     var result= confirm("Apakah yakin menghapus data?");
      
+     if(result){
      $.ajax({
          type: "DELETE",
          url: "{{ route('app.store') }}"+'/'+product_id,
@@ -360,7 +361,10 @@
              console.log('Error:', data);
          }
      });
- });
+ }else{
+  return false;
+ }
+ });  
 
   });
 
