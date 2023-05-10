@@ -312,6 +312,7 @@
         {data:'trial_type',name:'trial_type'},
         {data:'costing_approved',name:'costing_approved'},
         {data: 'action',name:'action',orderable:false, searchable: false},
+        
       ],
     });
 
@@ -320,6 +321,7 @@
       $('#new-data-modal').modal('show');
       $('#store').val("create-data");
       $('#data-form').trigger("reset");
+      $('#id').val('');
     });
     
     $('#store').click(function (e){
