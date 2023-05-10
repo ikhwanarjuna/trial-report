@@ -321,7 +321,6 @@
       $('#new-data-modal').modal('show');
       $('#store').val("create-data");
       $('#data-form').trigger("reset");
-      $('#id').val('');
     });
     
     $('#store').click(function (e){
