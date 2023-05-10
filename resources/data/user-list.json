@@ -1,0 +1,28 @@
+{
+    "data": [
+      {
+        "id": 1,
+        "document_number": "23/R&D-SJBD/1/23",
+        "document_date":"4/5/2023",
+        "trial_type":"Sample",
+        "trial_note":"-",
+        "item_code":"RHDMN-TTVNA-001",
+        "family_product":"HD",
+        "item_name":"HD BOYO MERAH",
+        "size": "12X27X0.3",
+        "note":"Sample",
+        "approval_created_by":"MUH TANIR",
+        "approval_created_date":"4/5/2023",
+        "approval_plant_head_name":"SABAR SARYANTO",
+        "approval_plant_head_date":"4/5/2023",
+        "approval_ppic_name":"WURYANI",
+        "approval_ppic_date":"4/5/2023",
+        "approval_gm_name":"KUSMASTUTI",
+        "approval_gm_date":"4/5/2023",
+        "status":"1",
+        "costing_staff_name":"INDAH",
+        "costing_approval_name":"MADYA ANA",
+        "costing_approval_date":"4/5/2023"
+      }
+    ]
+}

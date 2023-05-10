@@ -1,0 +1,49 @@
+{
+  "menu": [
+    {
+      "name": "Data",
+      "icon": "circle",
+      "slug": "",
+      "submenu": [
+        {
+          "url": "/app",
+          "name": "List",
+          "icon": "circle",
+          "slug": "app-user-list"
+        },
+        {
+          "name": "View",
+          "icon": "circle",
+          "slug": "",
+          "submenu": [
+            {
+              "url": "app/user/view/account",
+              "name": "Trial Material",
+              "slug": "app-user-view-account"
+            },
+            {
+              "url": "app/user/view/security",
+              "name": "Trial Approval",
+              "slug": "app-user-view-security"
+            },
+            {
+              "url": "app/user/view/billing",
+              "name": "Composition",
+              "slug": "app-user-view-billing"
+            },
+            {
+              "url": "app/user/view/notifications",
+              "name": "Trial Machine",
+              "slug": "app-user-view-notifications"
+            },
+            {
+              "url": "app/user/view/connections",
+              "name": "Acceptance",
+              "slug": "app-user-view-connections"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
