@@ -8,6 +8,8 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Data;
 use App\Models\Trial;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -29,7 +31,7 @@ class DatabaseSeeder extends Seeder
     // Trial::create([
     //     'id'=> Str::random(1),
     //     'document_number'=>'23/R&D-SJBD/1/23',
-    //     'document_date'=>'2023-05-04',
+    //     'document_date'=>Carbon::parse('2023-05-04'),
     //     'trial_type'=>1,
     //     'trial_note'=>'-',
     //     'item_code'=>'RHDMN-TTVNA-001',
@@ -40,15 +42,15 @@ class DatabaseSeeder extends Seeder
     //     'approval_created_by'=>'MUH TANIR',
     //     'approval_created_date'=>'',
     //     'approval_plant_head_name'=>'SABAR SARYANTO',
-    //     'approval_plant_head_date'=>'2023-05-04',
+    //     'approval_plant_head_date'=>Carbon::parse('2023-05-04'),
     //     'approval_ppic_name'=>'WURYANI',
-    //     'approval_ppic_date'=>'2023-05-04',
+    //     'approval_ppic_date'=>Carbon::parse('2023-05-04'),
     //     'approval_gm_name'=>'KUSMASTUTI',
-    //     'approval_gm_date'=>'2023-05-04',
+    //     'approval_gm_date'=>Carbon::parse('2023-05-04'),
     //     'costing_approved'=>false,
     //     'costing_staff_name'=>'INDAH',
     //     'costing_approval_name'=>'MADYA ANA',
-    //     'costing_approval_date'=>'2023-05-04'
+    //     'costing_approval_date'=>Carbon::parse('2023-05-04')
 
     // ]);
     }

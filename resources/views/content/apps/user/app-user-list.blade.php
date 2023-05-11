@@ -1,6 +1,6 @@
 @extends('layouts/contentLayoutMaster')
 
-@section('title', 'User List')
+@section('title', 'Data')
 
 @section('vendor-style')
   {{-- Page Css files --}}
@@ -9,11 +9,15 @@
   <link rel="stylesheet" href="{{ asset(mix('vendors/css/tables/datatable/responsive.bootstrap5.min.css')) }}">
   <link rel="stylesheet" href="{{ asset(mix('vendors/css/tables/datatable/buttons.bootstrap5.min.css')) }}">
   <link rel="stylesheet" href="{{ asset(mix('vendors/css/tables/datatable/rowGroup.bootstrap5.min.css')) }}">
+  <link rel="stylesheet" href="{{ asset(mix('vendors/css/pickers/pickadate/pickadate.css')) }}">
+  <link rel="stylesheet" href="{{ asset(mix('vendors/css/pickers/flatpickr/flatpickr.min.css')) }}">
 @endsection
 
 @section('page-style')
   {{-- Page Css files --}}
   <link rel="stylesheet" href="{{ asset(mix('css/base/plugins/forms/form-validation.css')) }}">
+  <link rel="stylesheet" href="{{ asset(mix('css/base/plugins/forms/pickers/form-flat-pickr.css')) }}">
+  <link rel="stylesheet" href="{{ asset(mix('css/base/plugins/forms/pickers/form-pickadate.css')) }}">
 @endsection
 
 @section('content')
@@ -99,12 +103,11 @@
                             <div class="row">
                               <div class="col mb-1 form-group">
                               <label>Nomor Dokumen :</label>
-                              <input type="text" placeholder="Nomor Dokumen" id="document_number" name="document_number" class="form-control" required />
-                              <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-document_number"></div>
+                              <input type="text" placeholder="Nomor Dokumen" id="document_number" name="document_number" class="form-control" required >
                             </div>
                             <div class="col mb-1 form-group">    
                               <label>Tanggal</label>
-                              <input type="date" placeholder="Tanggal" id="document_date" name="document_date" class="form-control" required/>
+                              <input type="text" placeholder="Tanggal" id="document_date" name="document_date" class="form-control flatpickr-basic" required>
                               <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-document_date"></div>
                             </div>
                             <div class="col mb-1 form-group">
@@ -129,19 +132,19 @@
                             <div class="row">
                               <div class="mb-1 col form-group">
                               <label>Kode Item</label>
-                              <input type="text" placeholder="Kode Item" id="item_code" name="item_code" class="form-control" />
+                              <input type="text" placeholder="Kode Item" id="item_code" name="item_code" class="form-control">
                               <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-item_code"></div>
                               </div>
 
                               <div class="mb-1 col form-group">
                               <label>Family Product</label>
-                              <input type="text" placeholder="Family Product" id="family_product" name="family_product" class="form-control" />
+                              <input type="text" placeholder="Family Product" id="family_product" name="family_product" class="form-control">
                               <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-family_product"></div>
                               </div>
 
                               <div class="mb-1 col form-group">
                               <label>Nama Item</label>
-                              <input type="text" placeholder="Nama Item" id="item_name" name="item_name" class="form-control" />
+                              <input type="text" placeholder="Nama Item" id="item_name" name="item_name" class="form-control">
                               <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-item_name"></div>
                               </div>
                             </div>
@@ -149,7 +152,7 @@
                             <div class="row">
                               <div class="mb-1 col form-group">
                               <label>Ukuran</label>
-                                <input type="text" placeholder="Ukuran" id="size" name="size" class="form-control" />
+                                <input type="text" placeholder="Ukuran" id="size" name="size" class="form-control">
                                 <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-size"></div>
                               </div>
 
@@ -163,13 +166,13 @@
                             <div class="row">
                               <div class="mb-1 col form-group">
                               <label>Disetujui Oleh</label>
-                              <input type="text" placeholder="Disetujui Oleh" id="approval_created_by" name="approval_created_by" class="form-control" />
+                              <input type="text" placeholder="Disetujui Oleh" id="approval_created_by" name="approval_created_by" class="form-control">
                               <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-approval_created_by"></div>
                               </div>
 
                               <div class="mb-1 col form-group">
                               <label>Tanggal Disetujui</label>
-                              <input type="date" placeholder="Tanggal Disetujui" id="approval_created_date" name="approval_created_date" class="form-control" />
+                              <input type="text" placeholder="Tanggal Disetujui" id="approval_created_date" name="approval_created_date" class="form-control form-control flatpickr-basic">
                               <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-approval_created_date"></div>
                               </div>
                             </div>
@@ -177,13 +180,13 @@
                             <div class="row">
                               <div class="mb-1 col form-group">
                               <label>Disetujui Oleh (Plant Head)</label>
-                              <input type="text" placeholder="Disetujui Oleh (Plant Head)" id="approval_plant_head_name" name="approval_plant_head_name" class="form-control" />
+                              <input type="text" placeholder="Disetujui Oleh (Plant Head)" id="approval_plant_head_name" name="approval_plant_head_name" class="form-control">
                               <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-approval_plant_head_name"></div>
                               </div>
 
                               <div class="mb-1 col form-group">
                               <label>Tanggal Disetujui (Plant Head)</label>
-                              <input type="date" placeholder="Tanggal Disetujui" id="approval_plant_head_date" name="approval_plant_head_date" class="form-control" />
+                              <input type="text" placeholder="Tanggal Disetujui" id="approval_plant_head_date" name="approval_plant_head_date" class="form-control form-control flatpickr-basic">
                               <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-approval_plant_head_date"></div>
                               </div>
                             </div>
@@ -191,13 +194,13 @@
                             <div class="row">
                               <div class="mb-1 col form-group">
                               <label>Disetujui Oleh (PPIC)</label>
-                              <input type="text" placeholder="Disetujui Oleh" id="approval_ppic_name" name="approval_ppic_name" class="form-control" />
+                              <input type="text" placeholder="Disetujui Oleh" id="approval_ppic_name" name="approval_ppic_name" class="form-control">
                               <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-approval_ppic_name"></div>
                               </div>
 
                               <div class="mb-1 col form-group">
                               <label>Tanggal Disetujui (PPIC)</label>
-                              <input type="date" placeholder="Tanggal Disetujui" id="approval_ppic_date" name="approval_ppic_date" class="form-control" />
+                              <input type="text" placeholder="Tanggal Disetujui" id="approval_ppic_date" name="approval_ppic_date" class="form-control form-control flatpickr-basic">
                               <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-approval_ppic_date"></div>
                               </div>
                             </div>
@@ -205,13 +208,13 @@
                             <div class="row">
                               <div class="mb-1 col form-group">
                               <label>Disetujui Oleh (GM)</label>
-                              <input type="text" placeholder="Disetujui Oleh" id="approval_gm_name" name="approval_gm_name" class="form-control" />
+                              <input type="text" placeholder="Disetujui Oleh" id="approval_gm_name" name="approval_gm_name" class="form-control">
                               <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-approval_gm_name"></div>
                               </div>
 
                               <div class="mb-1 col form-group">
                               <label>Tanggal Disetujui (GM)</label>
-                              <input type="date" placeholder="Tanggal Disetujui" id="approval_gm_date" name="approval_gm_date" class="form-control" />
+                              <input type="text" placeholder="Tanggal Disetujui" id="approval_gm_date" name="approval_gm_date" class="form-control form-control flatpickr-basic">
                               <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-approval_gm_date"></div>
                               </div>
                             </div>
@@ -219,13 +222,13 @@
                             <div class="row">
                               <div class="mb-1 col form-group">
                               <label>Costing Staff</label>
-                              <input type="text" placeholder="Costing Staff" class="form-control" id="costing_staff_name" name="costing_staff_name"/>
+                              <input type="text" placeholder="Costing Staff" class="form-control" id="costing_staff_name" name="costing_staff_name">
                               <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-costing_staff_name"></div>
                               </div>
 
                               <div class="mb-1 col form-group">
                               <label>Disetujui Oleh (Costing)</label>
-                              <input type="text" class="form-control" placeholder="Disetujui Oleh" id="costing_approval_name" name="costing_approval_name"/>
+                              <input type="text" class="form-control" placeholder="Disetujui Oleh" id="costing_approval_name" name="costing_approval_name">
                               <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-costing_approval_name"></div>
                               </div>
                             </div>
@@ -233,7 +236,7 @@
                             <div class="row">
                               <div class="mb-1 col form-group">
                                 <label>Tanggal Disetujui (Costing)</label>
-                                <input type="date" class="form-control" placeholder="Tanggal Disetujui" id="costing_approval_date" name="costing_approval_date"/>
+                                <input type="text" class="form-control form-control flatpickr-basic" placeholder="Tanggal Disetujui" id="costing_approval_date" name="costing_approval_date">
                                 <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-costing_approval_date"></div>
                                 </div>
   
@@ -243,11 +246,11 @@
                                     <option value="0">Tidak Disetujui</option>
                                     <option value="1">Disetujui</option>
                                   </select>
-                                  <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-costing_approved"></div>
+                                  <div class="alert alert-danger mt-2 d-none" data-bs-dismiss="modal" role="alert" id="alert-costing_approved"></div>
                                   </div>
                             </div>
-
-                              <div class="modal-footer">
+                            
+                            <div class="modal-footer">
                               <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" name="store" id="store">Simpan</button>
                             </div>
                           </form>
@@ -255,6 +258,7 @@
                       </div>
                     </div>
                   </div>
+        
                 
             
           
@@ -284,13 +288,31 @@
   <script src="{{ asset(mix('vendors/js/forms/validation/jquery.validate.min.js')) }}"></script>
   <script src="{{ asset(mix('vendors/js/forms/cleave/cleave.min.js')) }}"></script>
   <script src="{{ asset(mix('vendors/js/forms/cleave/addons/cleave-phone.us.js')) }}"></script>
+  <script src="{{ asset(mix('vendors/js/pickers/pickadate/picker.js')) }}"></script>
+  <script src="{{ asset(mix('vendors/js/pickers/pickadate/picker.date.js')) }}"></script>
+  <script src="{{ asset(mix('vendors/js/pickers/pickadate/picker.time.js')) }}"></script>
+  <script src="{{ asset(mix('vendors/js/pickers/pickadate/legacy.js')) }}"></script>
+  <script src="{{ asset(mix('vendors/js/pickers/flatpickr/flatpickr.min.js')) }}"></script>
 @endsection
 
 @section('page-script')
   {{-- Page js files --}}
   {{-- <script src="{{ asset(mix('js/scripts/pages/app-user-list.js')) }}"></script> --}}
+  <script src="{{ asset(mix('js/scripts/forms/pickers/form-pickers.js')) }}"></script>
+  <script src="{{ asset(mix('js/scripts/pages/app-user-list.js')) }}"></script>
   <script type="text/javascript">
   $(function(){
+    var statusObj = {
+      0: { title: 'Pending', class: 'badge-light-warning' },
+      1: { title: 'Disetujui', class: 'badge-light-success' },
+    };
+    var trialType = {
+      1: {title: 'Sample'},
+      2: {title: 'Sample Product'},
+      3: {title: 'Subtitusi Bahan'},
+      4: {title: 'New Formula'},
+      5: {title: 'Other'}
+    };
 
     // $('body').on('click', '#new-data', function () {
 
@@ -300,50 +322,132 @@
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
           }
     });
-    
     var table = $('.data-table').DataTable({
       processing: true,
       serverSide: true,
       ajax: "{{ route('app.index') }}",
       columns:[
         {data:'DT_RowIndex',name:'DT_RowIndex'},
-        {data:'document_number',name:'document_number'},
+        {data:'document_number',name:'document_number', render: function(data, type, row, meta){
+          return '<a style="font-family:montserrat;font-size:14px;font-weight:bold;" href="app/'+row.id +'">' + row.document_number + '</a>';},
+        },
         {data:'document_date',name:'document_date'},
-        {data:'trial_type',name:'trial_type'},
-        {data:'costing_approved',name:'costing_approved'},
-        {data: 'action',name:'action',orderable:false, searchable: false},
+        {data:'trial_type',name:'trial_type', render: function(data, type, row, meta){
+          return '<span>'+ trialType[row.trial_type].title + '</span>';
+        },},
+        {data:'costing_approved',name:'costing_approved', render: function(data, type, row, meta){
+          return '<span class="' + statusObj[row.costing_approved].class +'" text-capitalized>'+statusObj[row.costing_approved].title +'</span>';
+        },},
+        {data:'action',name:'action',orderable:false, searchable: false},
         
       ]
     });
-
-    //button
     $('#new-data').click(function () {
       $('#new-data-modal').modal('show');
-      $('#store').val("create-data");
-      $('#data-form').trigger("reset");
+      // $('#store').val("create-data");
+       $('#data-form').trigger("reset");
     });
-    
-    $('#store').click(function (e){
-      e.preventDefault();
-      $(this).html('Sending..');
 
-      $.ajax({
-        data: $('#data-form').serialize(),
-        url: '/app',
-        type: "POST",
-        dataType: 'json',
-        contentType: 'json',
-        success: function(data){
-          $('#data-form').trigger("reset");
-          $('#new-data-modal').modal('hide');
-          table.draw();
-        },
-        error: function(data){
-          console.log('Error:', data);
-          $('#store').html('Save Changes');
-        }
-      });
+    $('#store').click(function(e){
+      e.preventDefault();
+    
+
+    let document_number = $('#document_number').val();
+    let document_date = $('#document_date').val();
+    let trial_type = $('#trial_type').val();
+    let trial_note = $('#item_note').val();
+    let item_code = $('#item_code').val();
+    let family_product = $('#family_product').val();
+    let item_name = $('#item_name').val();
+    let size = $('#size').val();
+    let note = $('#note').val();
+    let approval_created_by = $('#approval_created_by').val();
+    let approval_created_date = $('#approval_created_date').val();
+    let approval_plant_head_name = $('#approval_plant_head_name').val();
+    let approval_plant_head_date = $('#approval_plant_head_date').val();
+    let approval_ppic_name = $('#approval_ppic_name').val();
+    let approval_ppic_date = $('#approval_ppic_date').val();
+    let approval_gm_name = $('#approval_gm_name').val();
+    let approval_gm_date = $('#approval_gm_date').val();
+    let costing_approved = $('#costing_approved').val();
+    let costing_staff_name = $('#costing_staff_name').val();
+    let costing_approval_name = $('#costing_approval_name').val();
+    let costing_approval_date = $('#costing_approval_date').val();
+
+    $.ajax({
+      url: "{{ route('app.store') }}",
+      type: "POST",
+      dataType: 'json',
+      data: {
+        "document_number" : document_number,
+        "document_date" : document_date,
+        "trial_type" : trial_type,
+        "trial_note" : trial_note,
+        "item_code" : item_code,
+        "family_product" : family_product,
+        "item_name" : item_name,
+        "size" : size,
+        "note" : note,
+        "approval_created_by" : approval_created_by,
+        "approval_created_date" : approval_created_date,
+        "approval_plant_head_name" : approval_plant_head_name,
+        "approval_plant_head_date" : approval_plant_head_date,
+        "approval_ppic_name" : approval_ppic_name,
+        "approval_ppic_date" : approval_ppic_date,
+        "approval_gm_name" : approval_gm_name,
+        "approval_gm_date" : approval_gm_date,
+        "costing_approved" : costing_approved,
+        "costing_staff_name" : costing_staff_name,
+        "costing_approval_name" : costing_approval_name,
+        "costing_approval_date" : costing_approval_date,
+      },
+      success:function(response){
+        Swal.fire({
+          type : 'success',
+          icon: 'success',
+          title : `${response.message}`,
+          showConfirmButton : false,
+          timer : 3000
+        });
+        table.draw();
+      },
+      error:function(response){
+        Swal.fire({
+          type : 'error',
+          icon: 'error',
+          title: "Data Gagal Tersimpan.",
+          showConfirmButton: false,
+          timer : 3000
+        });
+      }, 
     });
+  });
+
+
+    //button
+    
+    
+//     $('#store').click(function (e){
+//       e.preventDefault();
+//       $(this).html('Sending..');
+
+//       $.ajax({
+//         data: $('#data-form').serialize(),
+//         url: "{{ route('app.store') }}",
+//         type: "POST",
+//         dataType: 'json',
+//         contentType: 'json',
+//         success: function(data){
+//           $('#data-form').trigger('reset');
+//           $('#new-data-modal').modal('hide');
+//           table.draw();
+//         },
+//         error: function(data){
+//           console.log('Error:', data);
+//           $('#store').html('Save Changes');
+//         }
+//       });
+//     });
 
     $('body').on('click', '.deleteData', function () {
      
@@ -355,6 +459,13 @@
          type: "DELETE",
          url: "{{ route('app.store') }}"+'/'+product_id,
          success: function (data) {
+          Swal.fire({
+          type : 'success',
+          icon: 'success',
+          title : "Data Berhasil Dihapus.",
+          showConfirmButton : false,
+          timer : 3000
+        });
              table.draw();
          },
          error: function (data) {
@@ -364,37 +475,12 @@
  }else{
   return false;
  }
- });  
-
-  });
-
+ });   
+});
 
 
-  //   $('#store').click(function(e){
-  //     e.preventDefault();
+
     
-
-  //   var document_number = $('#document_number').val();
-  //   var document_date = $('#document_date').val();
-  //   var trial_type = $('#trial_type').val();
-  //   var trial_note = $('#item_note').val();
-  //   var item_code = $('#item_code').val();
-  //   var family_product = $('#family_product').val();
-  //   var item_name = $('#item_name').val();
-  //   var size = $('#size').val();
-  //   var note = $('#note').val();
-  //   var approval_created_by = $('#approval_created_by').val();
-  //   var approval_created_date = $('#approval_created_date').val();
-  //   var approval_plant_head_name = $('#approval_plant_head_name').val();
-  //   var approval_plant_head_date = $('#approval_plant_head_date').val();
-  //   var approval_ppic_name = $('#approval_ppic_name').val();
-  //   var approval_ppic_date = $('#approval_ppic_date').val();
-  //   var approval_gm_name = $('#approval_gm_name').val();
-  //   var approval_gm_date = $('#approval_gm_date').val();
-  //   var costing_approved = $('#costing_approved').val();
-  //   var costing_staff_name = $('#costing_staff_name').val();
-  //   var costing_approval_name = $('#costing_approval_name').val();
-  //   var costing_approval_date = $('#costing_approval_date').val();
   //   var token   = $("meta[name='csrf-token']").attr("content");
     
 
@@ -493,114 +579,114 @@
   //       $('#new-data-modal').modal('hide');
   //     },
 
-  //     error:function(error){
-  //       if(error.responseJSON.document_number[0]){
-  //         $('#alert-document_number').removeClass('d-none');
-  //         $('#alert-document_number').addClass('d-block');
-  //         $('#alert-document_number').html(error.responseJSON.document_number[0]);
-  //       }
-  //       if(error.responseJSON.document_date){
-  //         $('#alert-document_date').removeClass('d-none');
-  //         $('#alert-document_date').addClass('d-block');
-  //         $('#alert-document_date').html(error.responseJSON.document_date[0]);
-  //       }
-  //       if(error.responseJSON.trial_type[0]){
-  //         $('#alert-trial_type').removeClass('d-none');
-  //         $('#alert-trial_type').addClass('d-block');
-  //         $('#alert-trial_type').html(error.responseJSON.trial_type[0]);
-  //       }
-  //       if(error.responseJSON.trial_note[0]){
-  //         $('#alert-trial_note').removeClass('d-none');
-  //         $('#alert-trial_note').addClass('d-block');
-  //         $('#alert-trial_note').html(error.responseJSON.trial_note[0]);
-  //       }
-  //       if(error.responseJSON.item_code[0]){
-  //         $('#alert-item_code').removeClass('d-none');
-  //         $('#alert-item_code').addClass('d-block');
-  //         $('#alert-item_code').html(error.responseJSON.item_code[0]);
-  //       }
-  //       if(error.responseJSON.family_product[0]){
-  //         $('#alert-family_product').removeClass('d-none');
-  //         $('#alert-family_product').addClass('d-block');
-  //         $('#alert-family_product').html(error.responseJSON.family_product[0]);
-  //       }
-  //       if(error.responseJSON.item_name[0]){
-  //         $('#alert-item_name').removeClass('d-none');
-  //         $('#alert-item_name').addClass('d-block');
-  //         $('#alert-item_name').html(error.responseJSON.item_name[0]);
-  //       }
-  //       if(error.responseJSON.size[0]){
-  //         $('#alert-size').removeClass('d-none');
-  //         $('#alert-size').addClass('d-block');
-  //         $('#alert-size').html(error.responseJSON.size[0]);
-  //       }
-  //       if(error.responseJSON.note[0]){
-  //         $('#alert-note').removeClass('d-none');
-  //         $('#alert-note').addClass('d-block');
-  //         $('#alert-note').html(error.responseJSON.note[0]);
-  //       }
-  //       if(error.responseJSON.approval_created_by[0]){
-  //         $('#alert-approval_created_by').removeClass('d-none');
-  //         $('#alert-approval_created_by').addClass('d-block');
-  //         $('#alert-approval_created_by').html(error.responseJSON.approval_created_by[0]);
-  //       }
-  //       if(error.responseJSON.approval_created_date[0]){
-  //         $('#alert-approval_created_date').removeClass('d-none');
-  //         $('#alert-approval_created_date').addClass('d-block');
-  //         $('#alert-approval_created_date').html(error.responseJSON.approval_created_date[0]);
-  //       }
-  //       if(error.responseJSON.approval_plant_head_name[0]){
-  //         $('#alert-approval_plant_head_name').removeClass('d-none');
-  //         $('#alert-approval_plant_head_name').addClass('d-block');
-  //         $('#alert-approval_plant_head_name').html(error.responseJSON.approval_plant_head_name[0]);
-  //       }
-  //       if(error.responseJSON.approval_plant_head_date[0]){
-  //         $('#alert-approval_plant_head_date').removeClass('d-none');
-  //         $('#alert-approval_plant_head_date').addClass('d-block');
-  //         $('#alert-approval_plant_head_date').html(error.responseJSON.approval_plant_head_date[0]);
-  //       }
-  //       if(error.responseJSON.approval_ppic_name[0]){
-  //         $('#alert-approval_ppic_name').removeClass('d-none');
-  //         $('#alert-approval_ppic_name').addClass('d-block');
-  //         $('#alert-approval_ppic_name').html(error.responseJSON.approval_ppic_name[0]);
-  //       }
-  //       if(error.responseJSON.approval_ppic_date[0]){
-  //         $('#alert-approval_ppic_date').removeClass('d-none');
-  //         $('#alert-approval_ppic_date').addClass('d-block');
-  //         $('#alert-approval_ppic_date').html(error.responseJSON.approval_ppic_date[0]);
-  //       }
-  //       if(error.responseJSON.approval_gm_name[0]){
-  //         $('#alert-approval_gm_name').removeClass('d-none');
-  //         $('#alert-approval_gm_name').addClass('d-block');
-  //         $('#alert-approval_gm_name').html(error.responseJSON.approval_gm_name[0]);
-  //       }
-  //       if(error.responseJSON.approval_gm_date[0]){
-  //         $('#alert-approval_gm_date').removeClass('d-none');
-  //         $('#alert-approval_gm_date').addClass('d-block');
-  //         $('#alert-approval_gm_date').html(error.responseJSON.approval_gm_date[0]);
-  //       }
-  //       if(error.responseJSON.costing_staff_name[0]){
-  //         $('#alert-costing_staff_name').removeClass('d-none');
-  //         $('#alert-costing_staff_name').addClass('d-block');
-  //         $('#alert-costing_staff_name').html(error.responseJSON.costing_staff_name[0]);
-  //       }
-  //       if(error.responseJSON.costing_approved[0]){
-  //         $('#alert-costing_approved').removeClass('d-none');
-  //         $('#alert-costing_approved').addClass('d-block');
-  //         $('#alert-costing_approved').html(error.responseJSON.costing_approved[0]);
-  //       }
-  //       if(error.responseJSON.costing_approval_name[0]){
-  //         $('#alert-costing_approval_name').removeClass('d-none');
-  //         $('#alert-costing_approval_name').addClass('d-block');
-  //         $('#alert-costing_approval_name').html(error.responseJSON.costing_approval_name[0]);
-  //       }
-  //       if(error.responseJSON.costing_approval_date[0]){
-  //         $('#alert-costing_approval_date').removeClass('d-none');
-  //         $('#alert-costing_approval_date').addClass('d-block');
-  //         $('#alert-costing_approval_date').html(error.responseJSON.costing_approval_date[0]);
-  //       }
-  //     }
-  //   });
+    //   error:function(error){
+    //     if(error.responseJSON.document_number[0]){
+    //       $('#alert-document_number').removeClass('d-none');
+    //       $('#alert-document_number').addClass('d-block');
+    //       $('#alert-document_number').html(error.responseJSON.document_number[0]);
+    //     }
+    //     if(error.responseJSON.document_date){
+    //       $('#alert-document_date').removeClass('d-none');
+    //       $('#alert-document_date').addClass('d-block');
+    //       $('#alert-document_date').html(error.responseJSON.document_date[0]);
+    //     }
+    //     if(error.responseJSON.trial_type[0]){
+    //       $('#alert-trial_type').removeClass('d-none');
+    //       $('#alert-trial_type').addClass('d-block');
+    //       $('#alert-trial_type').html(error.responseJSON.trial_type[0]);
+    //     }
+    //     if(error.responseJSON.trial_note[0]){
+    //       $('#alert-trial_note').removeClass('d-none');
+    //       $('#alert-trial_note').addClass('d-block');
+    //       $('#alert-trial_note').html(error.responseJSON.trial_note[0]);
+    //     }
+    //     if(error.responseJSON.item_code[0]){
+    //       $('#alert-item_code').removeClass('d-none');
+    //       $('#alert-item_code').addClass('d-block');
+    //       $('#alert-item_code').html(error.responseJSON.item_code[0]);
+    //     }
+    //     if(error.responseJSON.family_product[0]){
+    //       $('#alert-family_product').removeClass('d-none');
+    //       $('#alert-family_product').addClass('d-block');
+    //       $('#alert-family_product').html(error.responseJSON.family_product[0]);
+    //     }
+    //     if(error.responseJSON.item_name[0]){
+    //       $('#alert-item_name').removeClass('d-none');
+    //       $('#alert-item_name').addClass('d-block');
+    //       $('#alert-item_name').html(error.responseJSON.item_name[0]);
+    //     }
+    //     if(error.responseJSON.size[0]){
+    //       $('#alert-size').removeClass('d-none');
+    //       $('#alert-size').addClass('d-block');
+    //       $('#alert-size').html(error.responseJSON.size[0]);
+    //     }
+    //     if(error.responseJSON.note[0]){
+    //       $('#alert-note').removeClass('d-none');
+    //       $('#alert-note').addClass('d-block');
+    //       $('#alert-note').html(error.responseJSON.note[0]);
+    //     }
+    //     if(error.responseJSON.approval_created_by[0]){
+    //       $('#alert-approval_created_by').removeClass('d-none');
+    //       $('#alert-approval_created_by').addClass('d-block');
+    //       $('#alert-approval_created_by').html(error.responseJSON.approval_created_by[0]);
+    //     }
+    //     if(error.responseJSON.approval_created_date[0]){
+    //       $('#alert-approval_created_date').removeClass('d-none');
+    //       $('#alert-approval_created_date').addClass('d-block');
+    //       $('#alert-approval_created_date').html(error.responseJSON.approval_created_date[0]);
+    //     }
+    //     if(error.responseJSON.approval_plant_head_name[0]){
+    //       $('#alert-approval_plant_head_name').removeClass('d-none');
+    //       $('#alert-approval_plant_head_name').addClass('d-block');
+    //       $('#alert-approval_plant_head_name').html(error.responseJSON.approval_plant_head_name[0]);
+    //     }
+    //     if(error.responseJSON.approval_plant_head_date[0]){
+    //       $('#alert-approval_plant_head_date').removeClass('d-none');
+    //       $('#alert-approval_plant_head_date').addClass('d-block');
+    //       $('#alert-approval_plant_head_date').html(error.responseJSON.approval_plant_head_date[0]);
+    //     }
+    //     if(error.responseJSON.approval_ppic_name[0]){
+    //       $('#alert-approval_ppic_name').removeClass('d-none');
+    //       $('#alert-approval_ppic_name').addClass('d-block');
+    //       $('#alert-approval_ppic_name').html(error.responseJSON.approval_ppic_name[0]);
+    //     }
+    //     if(error.responseJSON.approval_ppic_date[0]){
+    //       $('#alert-approval_ppic_date').removeClass('d-none');
+    //       $('#alert-approval_ppic_date').addClass('d-block');
+    //       $('#alert-approval_ppic_date').html(error.responseJSON.approval_ppic_date[0]);
+    //     }
+    //     if(error.responseJSON.approval_gm_name[0]){
+    //       $('#alert-approval_gm_name').removeClass('d-none');
+    //       $('#alert-approval_gm_name').addClass('d-block');
+    //       $('#alert-approval_gm_name').html(error.responseJSON.approval_gm_name[0]);
+    //     }
+    //     if(error.responseJSON.approval_gm_date[0]){
+    //       $('#alert-approval_gm_date').removeClass('d-none');
+    //       $('#alert-approval_gm_date').addClass('d-block');
+    //       $('#alert-approval_gm_date').html(error.responseJSON.approval_gm_date[0]);
+    //     }
+    //     if(error.responseJSON.costing_staff_name[0]){
+    //       $('#alert-costing_staff_name').removeClass('d-none');
+    //       $('#alert-costing_staff_name').addClass('d-block');
+    //       $('#alert-costing_staff_name').html(error.responseJSON.costing_staff_name[0]);
+    //     }
+    //     if(error.responseJSON.costing_approved[0]){
+    //       $('#alert-costing_approved').removeClass('d-none');
+    //       $('#alert-costing_approved').addClass('d-block');
+    //       $('#alert-costing_approved').html(error.responseJSON.costing_approved[0]);
+    //     }
+    //     if(error.responseJSON.costing_approval_name[0]){
+    //       $('#alert-costing_approval_name').removeClass('d-none');
+    //       $('#alert-costing_approval_name').addClass('d-block');
+    //       $('#alert-costing_approval_name').html(error.responseJSON.costing_approval_name[0]);
+    //     }
+    //     if(error.responseJSON.costing_approval_date[0]){
+    //       $('#alert-costing_approval_date').removeClass('d-none');
+    //       $('#alert-costing_approval_date').addClass('d-block');
+    //       $('#alert-costing_approval_date').html(error.responseJSON.costing_approval_date[0]);
+    //     }
+    //   }
+    // });
   // });
   </script>
   

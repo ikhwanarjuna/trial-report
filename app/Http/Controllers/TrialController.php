@@ -63,6 +63,8 @@ class TrialController extends Controller
 
        Trial::updateOrCreate([
                 'id' => $app->id,
+                ],
+                [
                 'document_number'     => $app->document_number, 
                 'document_date'   => $app->document_date,
                 'trial_type'   => $app->trial_type,
@@ -87,7 +89,7 @@ class TrialController extends Controller
 
         ]);
 
-        return response()->json(['success'=>'Data Berhasil Disimpan.']);
+        return response()->json(['message'=>'Data Berhasil Disimpan.'   ]);
    }
     //     $validator = Validator::make($app->all(),
     //     [
@@ -173,7 +175,7 @@ class TrialController extends Controller
         $datas = DB::table('trials')
         ->join('trial__materials', 'trials.id', '=', 'trial__materials.trial_id')
         ->get();
-        return view('content.apps.user.app-user-view-account',[
+        return view('content.apps.user.app-user-view',[
             'data'=> $app,
             'material'=> $datas
 
