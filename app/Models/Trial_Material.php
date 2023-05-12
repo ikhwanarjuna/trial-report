@@ -11,6 +11,7 @@ class Trial_Material extends Model
 {
     use HasFactory;
     use Uuid;
+    protected $guarded = ['id'];
 
     public function trial(){
         return $this->belongsTo(Trial::class);

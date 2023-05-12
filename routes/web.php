@@ -55,4 +55,3 @@ Route::group(['prefix' => '/app'], function () {
     Route::get('user/view/notifications', [AppsController::class, 'user_view_notifications'])->name('app-user-view-notifications')->middleware(('auth'));
     Route::get('user/view/connections', [AppsController::class, 'user_view_connections'])->name('app-user-view-connections')->middleware(('auth'));
 });
-
