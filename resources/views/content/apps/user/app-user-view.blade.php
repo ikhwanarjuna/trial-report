@@ -300,4 +300,8 @@
   <script src="{{ asset(mix('js/scripts/pages/modal-edit-user.js')) }}"></script>
   {{-- <script src="{{ asset(mix('js/scripts/pages/app-user-view-account.js')) }}"></script> --}}
   <script src="{{ asset(mix('js/scripts/pages/app-user-view.js')) }}"></script>
+<<<<<<< HEAD
 @endsection
+=======
+@endsection
+>>>>>>> 58d94daf634744bb594b40b91b4c196b91785608
