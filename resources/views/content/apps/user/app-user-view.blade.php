@@ -256,7 +256,10 @@
     var table = $('.dataTable-project').DataTable({
       processing : true,
       serverSide : true,
-      ajax: "{{ route('material.index') }}",
+      ajax: {
+        url: "{{ route('material.index') }}",
+        type: "GET"
+      },
       columns : [
         {material: 'DT_RowIndex', name:'DT_RowIndex'},
         {material: 'item_code', name:'item_code'},
