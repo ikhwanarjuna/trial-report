@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Trial;
+use App\Models\Trial_Material;
 use App\Http\Requests\StoreTrialRequest;
 use App\Http\Requests\UpdateTrialRequest;
 use Illuminate\Support\Facades\DB;
@@ -10,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 use Response;
 use Yajra\DataTables\DataTables;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 class TrialController extends Controller
 {
     /**
@@ -172,14 +174,8 @@ class TrialController extends Controller
      */
     public function show(Trial $app)
     {
-        $datas = DB::table('trials')
-        ->join('trial__materials', 'trials.id', '=', 'trial__materials.trial_id')
-        ->get();
-        return view('content.apps.user.app-user-view',[
-            'data'=> $app,
-            'material'=> $datas
 
-        ]);
+        
     }
 
     /**

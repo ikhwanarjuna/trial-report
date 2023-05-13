@@ -303,7 +303,7 @@
   <script type="text/javascript">
   $(function(){
     var statusObj = {
-      0: { title: 'Pending', class: 'badge-light-warning' },
+      0: { title: 'Pending', class: 'badge-light-danger' },
       1: { title: 'Disetujui', class: 'badge-light-success' },
     };
     var trialType = {
@@ -329,14 +329,14 @@
       columns:[
         {data:'DT_RowIndex',name:'DT_RowIndex'},
         {data:'document_number',name:'document_number', render: function(data, type, row, meta){
-          return '<a style="font-family:montserrat;font-size:14px;font-weight:bold;" href="app/'+row.id +'">' + row.document_number + '</a>';},
+          return '<a style="font-family:montserrat;font-size:14px;font-weight:bold;" href="/app/data/'+row.id +'">' + row.document_number + '</a>';},
         },
         {data:'document_date',name:'document_date'},
         {data:'trial_type',name:'trial_type', render: function(data, type, row, meta){
           return '<span>'+ trialType[row.trial_type].title + '</span>';
         },},
         {data:'costing_approved',name:'costing_approved', render: function(data, type, row, meta){
-          return '<span class="' + statusObj[row.costing_approved].class +'" text-capitalized>'+statusObj[row.costing_approved].title +'</span>';
+          return '<span class="badge rounded-pill ' + statusObj[row.costing_approved].class +'" text-capitalized>'+statusObj[row.costing_approved].title +'</span>';
         },},
         {data:'action',name:'action',orderable:false, searchable: false},
         

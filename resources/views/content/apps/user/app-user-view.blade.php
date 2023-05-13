@@ -24,6 +24,7 @@
   <div class="row">
     <!-- User Sidebar -->
     <div class="col-xl-4 col-lg-5 col-md-5 order-1 order-md-0">
+      <div class="col mb-2 md-4"><a href="javascript:void(0)" class="btn btn-success" id="new-material">Tambah Material</a></div>
       <!-- User Card -->
       <div class="card">
         <div class="card-body"> 
@@ -31,17 +32,13 @@
           <div class="info-container">
             <ul class="list-unstyled">
               <li class="mb-75">
-                {{-- @foreach ($data as $data)    --}}
+                 {{-- @foreach ($data as $data) --}}
                 <span class="fw-bolder me-25">Nomor :</span>
                 <span><b>{{ $data->document_number }}</b></span>
               </li>
               <li class="mb-75">
                 <span class="fw-bolder me-25">Tanggal Trial :</span>
                 <span>{{ $data->document_date }}</span>
-              </li>
-              <li class="mb-75">
-                <span class="fw-bolder me-25">Kode Item :</span>
-                <span>{{ $data->item_code }}</span>
               </li>
               <li class="mb-75">
                 <span class="fw-bolder me-25">Nama Produk :</span>
@@ -69,8 +66,8 @@
               </a>
               <a href="javascript:;" class="btn btn-outline-danger suspend-user">Suspended</a>
             </div> --}}
-            {{-- @break --}}
-            {{-- @endforeach --}}
+              {{-- @break
+             @endforeach --}}
           </div>
         </div>
       </div>
@@ -122,7 +119,7 @@
       <!-- User Pills -->
       <ul class="nav nav-pills mb-2">
         <li class="nav-item">
-          <a class="nav-link active" href="app/{{ $data->id }}">
+          <a class="nav-link active" href="{{ $data->id }}">
             <i data-feather="user" class="font-medium-1 me-50"></i>
             <span class="fw-bold">Trial Material</span></a>
         </li>
@@ -164,107 +161,56 @@
                 <th>QTY (zack)</th>
                 <th>QTY (Kg)</th>
               </tr>
-              @foreach ($material as $mat)
-              <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td>{{ $mat->item_code }}</td>
-                <td>{{ $mat->item_name }}</td>
-                <td>{{ $mat->qty_zack }}</td>
-                <td>{{ $mat->qty_kg }}</td>
-              </tr>
-              @endforeach
             </thead>
+            <tbody>
+            </tbody>
           </table>
         </div>
+
+        {{-- Modal --}}
+          <div class="modal modal-slide-in fade" id="tambah-material" aria-hidden="true">
+            <div class="modal-dialog sidebar-lg">
+              <div class="modal-content p-0">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">×</button>
+                <div class="modal-header mb-1">
+                  <h5 class="modal-title">
+                    <span class="align-middle">Tambah Material</span>
+                  </h5>
+                </div>
+                <div class="modal-body flex-grow-1">
+                  <form id="material-form">
+                    @csrf
+                    <div class="mb-1">
+                      <label class="form-label">Kode Item</label>
+                      <input type="text" id="trial_id" name="trial_id" class="form-control" value="{{ $data->id }}">
+                    </div>                    
+                    <div class="mb-1">
+                      <label class="form-label">Kode Item</label>
+                      <input type="text" id="item_code" name="item_code" class="form-control">
+                    </div>
+                    <div class="mb-1">
+                      <label class="form-label">Nama Item</label>
+                      <input id="item_name" name="item_name" class="form-control" type="text" />
+                    </div>
+                    <div class="mb-1">
+                      <label class="form-label">Quantity (Zack)</label>
+                      <input class="form-control" id="qty_zack" name="qty_zack" rows="5" type="number">
+                    </div>
+                    <div class="mb-1">
+                      <label class="form-label">Quantity (Kg)</label>
+                      <input class="form-control" id="qty_kg" name="qty_kg" rows="5" type="number">
+                    </div>
+                    <div class="d-flex flex-wrap mb-0">
+                      <button type="submit" class="btn btn-primary me-1" data-bs-dismiss="modal" id="store">Send</button>
+                      <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
       </div>
-      <!-- /Project table -->
-
-      <!-- Activity Timeline -->
-      {{-- <div class="card">
-        <h4 class="card-header">User Activity Timeline</h4>
-        <div class="card-body pt-1">
-          <ul class="timeline ms-50">
-            <li class="timeline-item">
-              <span class="timeline-point timeline-point-indicator"></span>
-              <div class="timeline-event">
-                <div class="d-flex justify-content-between flex-sm-row flex-column mb-sm-0 mb-1">
-                  <h6>User login</h6>
-                  <span class="timeline-event-time me-1">12 min ago</span>
-                </div>
-                <p>User login at 2:12pm</p>
-              </div>
-            </li>
-            <li class="timeline-item">
-              <span class="timeline-point timeline-point-warning timeline-point-indicator"></span>
-              <div class="timeline-event">
-                <div class="d-flex justify-content-between flex-sm-row flex-column mb-sm-0 mb-1">
-                  <h6>Meeting with john</h6>
-                  <span class="timeline-event-time me-1">45 min ago</span>
-                </div>
-                <p>React Project meeting with john @10:15am</p>
-                <div class="d-flex flex-row align-items-center mb-50">
-                  <div class="avatar me-50">
-                    <img
-                      src="{{asset('images/portrait/small/avatar-s-7.jpg')}}"
-                      alt="Avatar"
-                      width="38"
-                      height="38"
-                    />
-                  </div>
-                  <div class="user-info">
-                    <h6 class="mb-0">Leona Watkins (Client)</h6>
-                    <p class="mb-0">CEO of pixinvent</p>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li class="timeline-item">
-              <span class="timeline-point timeline-point-info timeline-point-indicator"></span>
-              <div class="timeline-event">
-                <div class="d-flex justify-content-between flex-sm-row flex-column mb-sm-0 mb-1">
-                  <h6>Create a new react project for client</h6>
-                  <span class="timeline-event-time me-1">2 day ago</span>
-                </div>
-                <p>Add files to new design folder</p>
-              </div>
-            </li>
-            <li class="timeline-item">
-              <span class="timeline-point timeline-point-danger timeline-point-indicator"></span>
-              <div class="timeline-event">
-                <div class="d-flex justify-content-between flex-sm-row flex-column mb-sm-0 mb-1">
-                  <h6>Create Invoices for client</h6>
-                  <span class="timeline-event-time me-1">12 min ago</span>
-                </div>
-                <p class="mb-0">Create new Invoices and send to Leona Watkins</p>
-                <div class="d-flex flex-row align-items-center mt-50">
-                  <img class="me-1" src="{{asset('images/icons/pdf.png')}}" alt="data.json" height="25" />
-                  <h6 class="mb-0">Invoices.pdf</h6>
-                </div>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div> --}}
-      <!-- /Activity Timeline -->
-
-      <!-- Invoice table -->
-      {{-- <div class="card">
-        <table class="invoice-table table text-nowrap">
-          <thead>
-            <tr>
-              <th></th>
-              <th>#ID</th>
-              <th><i data-feather="trending-up"></i></th>
-              <th>TOTAL Paid</th>
-              <th class="text-truncate">Issued Date</th>
-              <th class="cell-fit">Actions</th>
-            </tr>
-          </thead>
-        </table>
-      </div> --}}
-      <!-- /Invoice table -->
     </div>
-    <!--/ User Content -->
   </div>
 </section>
 
@@ -300,8 +246,70 @@
   <script src="{{ asset(mix('js/scripts/pages/modal-edit-user.js')) }}"></script>
   {{-- <script src="{{ asset(mix('js/scripts/pages/app-user-view-account.js')) }}"></script> --}}
   <script src="{{ asset(mix('js/scripts/pages/app-user-view.js')) }}"></script>
-<<<<<<< HEAD
+  <script>
+    $(function(){
+      $.ajaxSetup({
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+    });
+    var table = $('.dataTable-project').DataTable({
+      processing : true,
+      serverSide : true,
+      ajax: "{{ route('material.index') }}",
+      columns : [
+        {material: 'DT_RowIndex', name:'DT_RowIndex'},
+        {material: 'item_code', name:'item_code'},
+        {material: 'item_name', name:'item_name'},
+        {material: 'qty_zack', name: 'qty_zack'},
+        {material: 'qty_kg', name: 'qty_kg'},
+      ]
+    });
+    $('#new-material').click(function () {
+      $('#tambah-material').modal('show');
+      // $('#store').val("create-data");
+       $('#material-form').trigger("reset");
+    });
+    $('#store').click(function(e){
+      e.preventDefault();
+      let item_code = $('#item_code').val();
+      let item_name = $('#item_name').val();
+      let qty_zack = $('#qty_zack').val();
+      let qty_kg = $('#qty_kg').val();
+      let trial_id = $('#trial_id').val();
+
+      $.ajax({
+        url : "{{ route('material.store') }}",
+        type: "POST",
+        dataType: 'json',
+        data: {
+          "item_code" : item_code,
+          "item_name" : item_name,
+          "qty_zack" : qty_zack,
+          "qty_kg" : qty_kg,
+          "trial_id" : trial_id
+        },
+        success:function(response){
+        Swal.fire({
+          type : 'success',
+          icon: 'success',
+          title : `${response.message}`,
+          showConfirmButton : false,
+          timer : 3000
+        });
+        table.draw();
+      },
+      error:function(response){
+        Swal.fire({
+          type : 'error',
+          icon: 'error',
+          title: "Data Gagal Tersimpan.",
+          showConfirmButton: false,
+          timer : 3000
+        });
+      },
+      });
+    });
+  });
+    </script>
 @endsection
-=======
-@endsection
->>>>>>> 58d94daf634744bb594b40b91b4c196b91785608
