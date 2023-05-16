@@ -329,7 +329,7 @@
       columns:[
         {data:'DT_RowIndex',name:'DT_RowIndex'},
         {data:'document_number',name:'document_number', render: function(data, type, row, meta){
-          return '<a style="font-family:montserrat;font-size:14px;font-weight:bold;" href="/app/data/'+row.id+'">' + row.document_number + '</a>';},
+          return '<a style="font-family:montserrat;font-size:14px;font-weight:bold;" href="{{ route('material.index') }}'+'/'+row.id+'">' + row.document_number + '</a>';},
         },
         {data:'document_date',name:'document_date'},
         {data:'trial_type',name:'trial_type', render: function(data, type, row, meta){

@@ -55,7 +55,7 @@ class TrialMaterialController extends Controller
      * @param  \App\Http\Requests\StoreTrial_MaterialRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($request)
+    public function store(StoreTrial_MaterialRequest $request)
     {
         $material = new Trial_Material();
         $material->item_code = $request->input('item_code');
@@ -108,9 +108,9 @@ class TrialMaterialController extends Controller
      * @param  \App\Models\Trial_Material  $trial_Material
      * @return \Illuminate\Http\Response
      */
-    public function destroy($data)
+    public function destroy($id)
     {
-        Trial_Material::findOrFail($data->id)->delete();
-        return response()->json(['success'=>'Data berhasil dihapus. ']);
+        Trial_Material::find($id)->delete();
+        return response()->json(['success'=>'Data berhasil dihapus.']);
     }
 }

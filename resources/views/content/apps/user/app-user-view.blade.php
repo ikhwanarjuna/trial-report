@@ -193,10 +193,7 @@
                 <div class="modal-body flex-grow-1">
                   <form id="material-form">
                     @csrf   
-                    <div class="mb-1">
-                      <label class="form-label">Trial ID</label>
-                      <input type="text" id="trial_id" name="trial_id" class="form-control" value="{{ $data->id }}">
-                    </div>                                     
+                      <input type="text" id="trial_id" name="trial_id" class="form-control" value="{{ $data->id }}" hidden>                                    
                     <div class="mb-1">
                       <label class="form-label">Kode Item</label>
                       <input type="text" id="item_code" name="item_code" class="form-control">
@@ -313,7 +310,7 @@
           icon: 'success',
           title : "Data berhasil Ditambahkan",
           showConfirmButton : false,
-          timer : 1000
+          timer : 3000
         });
         table.draw();
       },
@@ -336,7 +333,7 @@
      if(result){
      $.ajax({
          type: "DELETE",
-         url: 'data/'+id1,
+         url: 'app/data/'+'/'+id1,
          success: function (data) {
           Swal.fire({
           type : 'success',
