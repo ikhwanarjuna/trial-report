@@ -6,8 +6,11 @@ use App\Models\Trial_Material;
 use App\Models\Trial;
 use App\Http\Requests\StoreTrial_MaterialRequest;
 use App\Http\Requests\UpdateTrial_MaterialRequest;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Str;
 class TrialMaterialController extends Controller
 {
     /**
@@ -17,8 +20,8 @@ class TrialMaterialController extends Controller
      */
     public function index(Request $request)
     {
+        $material = Trial_Material::latest()->where('trial_id', $request->id)->get();
         if ($request->ajax()){
-            $material = Trial_Material::latest()->get();
             return DataTables::of($material)
                 ->addIndexColumn()
                 ->addColumn('action',function($row){
@@ -27,10 +30,11 @@ class TrialMaterialController extends Controller
                 })
                 ->rawColumns(['action'])
                 ->make(true);
-        }
+    }
         return view('content.apps.user.app-user-view',[
             $data = Trial::where('id', $request->id)->first(),
             'data'=> $data,
+            // 'material' => $material,
 
         ]);
     }
@@ -51,19 +55,17 @@ class TrialMaterialController extends Controller
      * @param  \App\Http\Requests\StoreTrial_MaterialRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreTrial_MaterialRequest $request)
+    public function store($request)
     {
-        Trial_Material::updateOrCreate([
-            'id' => $request->id
-        ],
-        [   
-            'trial_id' => $request->trial_id,
-            'item_code' => $request->item_code,
-            'item_name'=> $request->item_name,
-            'qty_zack'=> $request->qty_zack,
-            'qty_kg' => $request -> qty_kg,
-        ]);
-        return response()->json(['message' =>'Berhasil Menambah Data']);
+        $material = new Trial_Material();
+        $material->item_code = $request->input('item_code');
+        $material->item_name = $request->input('item_name');
+        $material->qty_zack = $request->input('qty_zack');
+        $material->qty_kg = $request->input('qty_kg');
+        $material->trial_id = $request->input('trial_id');
+        $material->save();
+
+        return response()->json(['success'=>'Data berhasil Disimpan.']);
     }
 
     /**
@@ -74,7 +76,7 @@ class TrialMaterialController extends Controller
      */
     public function show(Trial_Material $trial_Material)
     {
-        //
+        return response()->json($trial_Material->toArray());
     }
 
     /**
@@ -106,8 +108,9 @@ class TrialMaterialController extends Controller
      * @param  \App\Models\Trial_Material  $trial_Material
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Trial_Material $trial_Material)
+    public function destroy($data)
     {
-        //
+        Trial_Material::findOrFail($data->id)->delete();
+        return response()->json(['success'=>'Data berhasil dihapus. ']);
     }
 }

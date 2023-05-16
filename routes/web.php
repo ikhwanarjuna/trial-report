@@ -42,17 +42,16 @@ Route::post('/logout', [LoginController::class, 'logout']);
 
 
 //Route::get('/app', [AppsController::class, 'user_list'])->name('app-user-list');
-Route::resource('/app', TrialController::class)->middleware(('auth'));
-Route::resource('/app/data/{id?}', TrialMaterialController::class, ['names' => 'material'])->middleware(('auth'));
-
+Route::resource('app', TrialController::class)->middleware(('auth'));
+Route::resource('app/data/{id?}', TrialMaterialController::class, ['names'=>'material'])->middleware(('auth'));
 
 /* Route Dashboards */
 /* Route Dashboards */
 
 /* Route Apps */
-Route::group(['prefix' => '/app'], function () {   
-    Route::get('user/view/security', [AppsController::class, 'user_view_security'])->name('app-user-view-security')->middleware(('auth'));
-    Route::get('user/view/billing', [AppsController::class, 'user_view_billing'])->name('app-user-view-billing')->middleware(('auth'));
-    Route::get('user/view/notifications', [AppsController::class, 'user_view_notifications'])->name('app-user-view-notifications')->middleware(('auth'));
-    Route::get('user/view/connections', [AppsController::class, 'user_view_connections'])->name('app-user-view-connections')->middleware(('auth'));
-});
+// Route::group(['prefix' => '/app'], function () {   
+//     Route::get('user/view/security', [AppsController::class, 'user_view_security'])->name('app-user-view-security')->middleware(('auth'));
+//     Route::get('user/view/billing', [AppsController::class, 'user_view_billing'])->name('app-user-view-billing')->middleware(('auth'));
+//     Route::get('user/view/notifications', [AppsController::class, 'user_view_notifications'])->name('app-user-view-notifications')->middleware(('auth'));
+//     Route::get('user/view/connections', [AppsController::class, 'user_view_connections'])->name('app-user-view-connections')->middleware(('auth'));
+// });

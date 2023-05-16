@@ -66,8 +66,8 @@
               </a>
               <a href="javascript:;" class="btn btn-outline-danger suspend-user">Suspended</a>
             </div> --}}
-              {{-- @break
-             @endforeach --}}
+              {{-- @break --}}
+             {{-- @endforeach --}}
           </div>
         </div>
       </div>
@@ -160,9 +160,22 @@
                 <th>Item</th>
                 <th>QTY (zack)</th>
                 <th>QTY (Kg)</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
+              
+              {{-- @foreach ($material as $mat)
+              <tr>
+                <td>{{ $loop->iteration }}</td>
+                <td>{{ $mat->item_code }}</td>
+                <td>{{ $mat->item_name }}</td>
+                <td>{{ $mat->qty_zack }}</td>
+                <td>{{ $mat->qty_kg }}</td>
+                <td><a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteData">Delete</a></td>  
+                <tr>
+                @endforeach --}}
+                
             </tbody>
           </table>
         </div>
@@ -179,11 +192,11 @@
                 </div>
                 <div class="modal-body flex-grow-1">
                   <form id="material-form">
-                    @csrf
+                    @csrf   
                     <div class="mb-1">
-                      <label class="form-label">Kode Item</label>
+                      <label class="form-label">Trial ID</label>
                       <input type="text" id="trial_id" name="trial_id" class="form-control" value="{{ $data->id }}">
-                    </div>                    
+                    </div>                                     
                     <div class="mb-1">
                       <label class="form-label">Kode Item</label>
                       <input type="text" id="item_code" name="item_code" class="form-control">
@@ -253,19 +266,23 @@
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
           }
     });
-    var table = $('.dataTable-project').DataTable({
+    var url = window.location.pathname;
+    var id = url.substring(url.lastIndexOf('/') + 1);
+    var table = $('.datatable-project').DataTable({
       processing : true,
       serverSide : true,
+      dataType: 'json',
       ajax: {
-        url: "{{ route('material.index') }}",
-        type: "GET"
+              url: "/app/data"+'/'+id,
+              type: "GET"
       },
       columns : [
-        {material: 'DT_RowIndex', name:'DT_RowIndex'},
-        {material: 'item_code', name:'item_code'},
-        {material: 'item_name', name:'item_name'},
-        {material: 'qty_zack', name: 'qty_zack'},
-        {material: 'qty_kg', name: 'qty_kg'},
+        {data: 'DT_RowIndex', name:'DT_RowIndex'},
+        {data: 'item_code', name:'item_code'},
+        {data: 'item_name', name:'item_name'},
+        {data: 'qty_zack', name: 'qty_zack'},
+        {data: 'qty_kg', name: 'qty_kg'},
+        {data: 'action', name: 'action'}
       ]
     });
     $('#new-material').click(function () {
@@ -280,7 +297,6 @@
       let qty_zack = $('#qty_zack').val();
       let qty_kg = $('#qty_kg').val();
       let trial_id = $('#trial_id').val();
-
       $.ajax({
         url : "{{ route('material.store') }}",
         type: "POST",
@@ -290,21 +306,19 @@
           "item_name" : item_name,
           "qty_zack" : qty_zack,
           "qty_kg" : qty_kg,
-          "trial_id" : trial_id
+          "trial_id": trial_id
         },
         success:function(response){
         Swal.fire({
-          type : 'success',
           icon: 'success',
-          title : `${response.message}`,
+          title : "Data berhasil Ditambahkan",
           showConfirmButton : false,
-          timer : 3000
+          timer : 1000
         });
         table.draw();
       },
       error:function(response){
         Swal.fire({
-          type : 'error',
           icon: 'error',
           title: "Data Gagal Tersimpan.",
           showConfirmButton: false,
@@ -313,6 +327,35 @@
       },
       });
     });
+
+    $('body').on('click', '.deleteData', function () {
+     
+     var id1 = $(this).data("id");
+     var result= confirm("Apakah yakin menghapus data?");
+     
+     if(result){
+     $.ajax({
+         type: "DELETE",
+         url: 'data/'+id1,
+         success: function (data) {
+          Swal.fire({
+          type : 'success',
+          icon: 'success',
+          title : "Data Berhasil Dihapus.",
+          showConfirmButton : false,
+          timer : 3000
+        });
+             table.draw();
+         },
+         error: function (data) {
+             console.log('Error:', data);
+         }
+     });
+ }else{
+  return false;
+ }
+ });   
+
   });
     </script>
 @endsection
