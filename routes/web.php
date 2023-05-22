@@ -43,7 +43,8 @@ Route::post('/logout', [LoginController::class, 'logout']);
 
 //Route::get('/app', [AppsController::class, 'user_list'])->name('app-user-list');
 Route::resource('app', TrialController::class)->middleware(('auth'));
-Route::resource('app/data/{id?}', TrialMaterialController::class, ['names'=>'material'])->middleware(('auth'));
+Route::resource('data/{id?}', TrialMaterialController::class, ['names'=>'material','except'=>'destroy'])->middleware(('auth'));
+Route::delete('data/{id?}',[TrialMaterialController::class, 'destroy'])->name('material.destroy')->middleware(('auth'));
 
 /* Route Dashboards */
 /* Route Dashboards */

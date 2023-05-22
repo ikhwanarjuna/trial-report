@@ -8,6 +8,7 @@ use App\Http\Requests\StoreTrial_MaterialRequest;
 use App\Http\Requests\UpdateTrial_MaterialRequest;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Str;
@@ -25,7 +26,8 @@ class TrialMaterialController extends Controller
             return DataTables::of($material)
                 ->addIndexColumn()
                 ->addColumn('action',function($row){
-                    $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteData">Delete</a>';
+                    $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" class="btn btn-primary btn-sm editData">Edit</a>';
+                    $btn = $btn.'<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-danger mx-1 btn-sm deleteData">Delete</a>';
                     return $btn;
                 })
                 ->rawColumns(['action'])
@@ -76,7 +78,10 @@ class TrialMaterialController extends Controller
      */
     public function show(Trial_Material $trial_Material)
     {
-        return response()->json($trial_Material->toArray());
+        return response()->json([
+            'success'=>true,
+            'data' => $trial_Material
+        ]);
     }
 
     /**
@@ -85,9 +90,9 @@ class TrialMaterialController extends Controller
      * @param  \App\Models\Trial_Material  $trial_Material
      * @return \Illuminate\Http\Response
      */
-    public function edit(Trial_Material $trial_Material)
+    public function edit(Trial_Material $id)
     {
-        //
+     //
     }
 
     /**
@@ -97,9 +102,13 @@ class TrialMaterialController extends Controller
      * @param  \App\Models\Trial_Material  $trial_Material
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateTrial_MaterialRequest $request, Trial_Material $trial_Material)
+    public function update(UpdateTrial_MaterialRequest $request, $id)
     {
-        //
+        $data= Trial_Material::findOrFail($id);
+        $data->update($request->all());
+        return response()->json([
+            'success'=>'Data berhasil dirubah. '
+        ]);
     }
 
     /**
@@ -108,9 +117,9 @@ class TrialMaterialController extends Controller
      * @param  \App\Models\Trial_Material  $trial_Material
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Trial_Material $id)
     {
-        Trial_Material::find($id)->delete();
+        Trial_Material::destroy($id->id);      
         return response()->json(['success'=>'Data berhasil dihapus.']);
     }
 }

@@ -210,6 +210,6 @@ class TrialController extends Controller
     public function destroy($id)
     {
         Trial::find($id)->delete();
-        return response()->json(['success'=>'Data berhasil dihapus. ']);
+        return response()->json(['success'=>'Data berhasil dihapus.']);
     }
 }

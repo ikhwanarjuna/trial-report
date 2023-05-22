@@ -32,6 +32,7 @@
           <div class="info-container">
             <ul class="list-unstyled">
               <li class="mb-75">
+                
                  {{-- @foreach ($data as $data) --}}
                 <span class="fw-bolder me-25">Nomor :</span>
                 <span><b>{{ $data->document_number }}</b></span>
@@ -160,7 +161,7 @@
                 <th>Item</th>
                 <th>QTY (zack)</th>
                 <th>QTY (Kg)</th>
-                <th>Action</th>
+                <th width="160px">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -186,8 +187,8 @@
               <div class="modal-content p-0">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">×</button>
                 <div class="modal-header mb-1">
-                  <h5 class="modal-title">
-                    <span class="align-middle">Tambah Material</span>
+                  <h5 class="modal-title align-middle" id="modalHeading">
+                    {{-- <span class="align-middle"></span> --}}
                   </h5>
                 </div>
                 <div class="modal-body flex-grow-1">
@@ -270,21 +271,22 @@
       serverSide : true,
       dataType: 'json',
       ajax: {
-              url: "/app/data"+'/'+id,
+              url: "{{ route('material.index') }}"+'/'+id,
               type: "GET"
       },
       columns : [
         {data: 'DT_RowIndex', name:'DT_RowIndex'},
         {data: 'item_code', name:'item_code'},
         {data: 'item_name', name:'item_name'},
-        {data: 'qty_zack', name: 'qty_zack'},
-        {data: 'qty_kg', name: 'qty_kg'},
-        {data: 'action', name: 'action'}
+        {data: 'qty_zack', name:'qty_zack'},
+        {data: 'qty_kg', name:'qty_kg'},
+        {data: 'action', name:'action', searchable:false, orderable: false}
       ]
     });
     $('#new-material').click(function () {
       $('#tambah-material').modal('show');
       // $('#store').val("create-data");
+      $('#modalHeading').html("Tambah Material");
        $('#material-form').trigger("reset");
     });
     $('#store').click(function(e){
@@ -295,7 +297,7 @@
       let qty_kg = $('#qty_kg').val();
       let trial_id = $('#trial_id').val();
       $.ajax({
-        url : "{{ route('material.store') }}",
+        url : "data/",
         type: "POST",
         dataType: 'json',
         data: {
@@ -325,15 +327,34 @@
       });
     });
 
+
+    $('body').on('click', '.editData', function () {
+      var id1 = $(this).data('id');
+      $.ajax({
+        url: "{{ route('material.index') }}"+'/'+id1,
+        type: "GET",
+        cache: false,
+        success: function(response){
+          $('#trial_id').val(response.data.trial_id);
+          $('#item_code').val(response.data.item_code);
+          $('#item_name').val(response.data.item_name);
+          $('#qty_zack').val(response.data.qty_zack);
+          $('#qty_kg').val(response.data.qty_kg);
+          $('#tambah-material').modal('show');
+          $('#modalHeading').html("Edit Data");
+        }
+      });
+      });
+
     $('body').on('click', '.deleteData', function () {
-     
-     var id1 = $(this).data("id");
+     let id1 = $(this).data('id');
      var result= confirm("Apakah yakin menghapus data?");
      
      if(result){
      $.ajax({
          type: "DELETE",
-         url: 'app/data/'+'/'+id1,
+         url:  "{{ route('material.destroy') }}"+'/'+id1,
+         cache: false,
          success: function (data) {
           Swal.fire({
           type : 'success',
