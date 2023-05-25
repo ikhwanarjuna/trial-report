@@ -231,7 +231,7 @@
                   </h5>
                 </div>
                 <div class="modal-body flex-grow-1">
-                  <form id="material-form">
+                  <form id="edit-form">
                     @csrf   
                       <input type="text" id="trial_id" name="trial_id" class="form-control" value="">                                    
                     <div class="mb-1">
@@ -368,13 +368,14 @@
 
 
     $('body').on('click', '.editData', function () {
-      var id1 = $(this).data('id');
+      let id1 = $(this).data('id');
       $.ajax({
         url: id1+'/edit',
-        type: "GET",
+        type: 'GET',
         dataType: 'json',
         cache: false,
         success: function(response){
+          console.log(response);
           $('#trial_id').val(response.trial_id);
           $('#item_code').val(response.item_code);
           $('#item_name').val(response.item_name);
