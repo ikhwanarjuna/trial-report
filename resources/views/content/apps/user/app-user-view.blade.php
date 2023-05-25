@@ -61,60 +61,10 @@
                   <span class="badge bg-light-success">Disetujui</span>
                   @endif
               </li>
-            {{-- <div class="d-flex justify-content-center pt-2">
-              <a href="javascript:;" class="btn btn-primary me-1" data-bs-target="#editUser" data-bs-toggle="modal">
-                Edit
-              </a>
-              <a href="javascript:;" class="btn btn-outline-danger suspend-user">Suspended</a>
-            </div> --}}
-              {{-- @break --}}
-             {{-- @endforeach --}}
           </div>
         </div>
       </div>
-      <!-- /User Card -->
-      <!-- Plan Card -->
-      {{-- <div class="card border-primary">
-        <div class="card-body">
-          <div class="d-flex justify-content-between align-items-start">
-            <span class="badge bg-light-primary">Standard</span>
-            <div class="d-flex justify-content-center">
-              <sup class="h5 pricing-currency text-primary mt-1 mb-0">$</sup>
-              <span class="fw-bolder display-5 mb-0 text-primary">99</span>
-              <sub class="pricing-duration font-small-4 ms-25 mt-auto mb-2">/month</sub>
-            </div>
-          </div>
-          <ul class="ps-1 mb-2">
-            <li class="mb-50">10 Users</li>
-            <li class="mb-50">Up to 10 GB storage</li>
-            <li>Basic Support</li>
-          </ul>
-          <div class="d-flex justify-content-between align-items-center fw-bolder mb-50">
-            <span>Days</span>
-            <span>4 of 30 Days</span>
-          </div>
-          <div class="progress mb-50" style="height: 8px">
-            <div
-              class="progress-bar"
-              role="progressbar"
-              style="width: 80%"
-              aria-valuenow="65"
-              aria-valuemax="100"
-              aria-valuemin="80"
-            ></div>
-          </div>
-          <span>4 days remaining</span>
-          <div class="d-grid w-100 mt-2">
-            <button class="btn btn-primary" data-bs-target="#upgradePlanModal" data-bs-toggle="modal">
-              Upgrade Plan
-            </button>
-          </div>
-        </div>
-      </div> --}}
-      <!-- /Plan Card -->
     </div>
-    <!--/ User Sidebar -->
-
     <!-- User Content -->
     <div class="col-xl-8 col-lg-7 col-md-7 order-0 order-md-1">
       <!-- User Pills -->
@@ -164,31 +114,19 @@
                 <th width="160px">Action</th>
               </tr>
             </thead>
-            <tbody>
-              
-              {{-- @foreach ($material as $mat)
-              <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td>{{ $mat->item_code }}</td>
-                <td>{{ $mat->item_name }}</td>
-                <td>{{ $mat->qty_zack }}</td>
-                <td>{{ $mat->qty_kg }}</td>
-                <td><a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteData">Delete</a></td>  
-                <tr>
-                @endforeach --}}
-                
+            <tbody>                
             </tbody>
           </table>
         </div>
 
         {{-- Modal --}}
-          <div class="modal modal-slide-in fade" id="tambah-material" aria-hidden="true">
+          {{-- <div class="modal modal-slide-in fade" id="tambah-material" aria-hidden="true">
             <div class="modal-dialog sidebar-lg">
               <div class="modal-content p-0">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">×</button>
                 <div class="modal-header mb-1">
                   <h5 class="modal-title align-middle" id="modalHeading">
-                    {{-- <span class="align-middle"></span> --}}
+                    <span class="align-middle"></span>
                   </h5>
                 </div>
                 <div class="modal-body flex-grow-1">
@@ -219,36 +157,38 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> --}}
+          @include('content.apps.user.modal-create')
+          @include('content.apps.user.modal-edit')
 {{-- modal edit --}}
-          <div class="modal modal-slide-in fade" id="edit-material" aria-hidden="true">
+          {{-- <div class="modal modal-slide-in fade" id="edit-material" aria-hidden="true">
             <div class="modal-dialog sidebar-lg">
               <div class="modal-content p-0">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">×</button>
                 <div class="modal-header mb-1">
-                  <h5 class="modal-title align-middle" id="modalHeading">
-                    <span class="align-middle">Edit Data</span>
+                  <h5 class="modal-title align-middle" id="modalHeader">
+                    <span class="align-middle"></span>
                   </h5>
                 </div>
                 <div class="modal-body flex-grow-1">
                   <form id="edit-form">
                     @csrf   
-                      <input type="text" id="trial_id" name="trial_id" class="form-control" value="">                                    
+                      <input type="text" id="triale_id" name="trial_id" class="form-control" value="">                                    
                     <div class="mb-1">
                       <label class="form-label">Kode Item</label>
-                      <input type="text" id="item_code" name="item_code" class="form-control" value="">
+                      <input type="text" id="iteme_code" name="item_code" class="form-control" value="">
                     </div>
                     <div class="mb-1">
                       <label class="form-label">Nama Item</label>
-                      <input id="item_name" name="item_name" class="form-control" type="text" value="" />
+                      <input id="iteme_name" name="item_name" class="form-control" type="text" value="" />
                     </div>
                     <div class="mb-1">
                       <label class="form-label">Quantity (Zack)</label>
-                      <input class="form-control" id="qty_zack" name="qty_zack" rows="5" type="number" value="">
+                      <input class="form-control" id="qtye_zack" name="qty_zack" rows="5" type="number" value="">
                     </div>
                     <div class="mb-1">
                       <label class="form-label">Quantity (Kg)</label>
-                      <input class="form-control" id="qty_kg" name="qty_kg" rows="5" type="number" value="">
+                      <input class="form-control" id="qtye_kg" name="qty_kg" rows="5" type="number" value="">
                     </div>
                     <div class="d-flex flex-wrap mb-0">
                       <button type="submit" class="btn btn-primary me-1" data-bs-dismiss="modal" id="store">Send</button>
@@ -258,14 +198,11 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> --}}
       </div>
     </div>
   </div>
 </section>
-
-@include('content/_partials/_modals/modal-edit-user')
-@include('content/_partials/_modals/modal-upgrade-plan')
 @endsection
 
 @section('vendor-script')
@@ -322,12 +259,7 @@
         {data: 'action', name:'action', searchable:false, orderable: false}
       ]
     });
-    $('#new-material').click(function () {
-      $('#tambah-material').modal('show');
-      // $('#store').val("create-data");
-      $('#modalHeading').html("Tambah Material");
-       $('#material-form').trigger("reset");
-    });
+
     $('#store').click(function(e){
       e.preventDefault();
       let item_code = $('#item_code').val();
@@ -365,26 +297,6 @@
       },
       });
     });
-
-
-    $('body').on('click', '.editData', function () {
-      let id1 = $(this).data('id');
-      $.ajax({
-        url: id1+'/edit',
-        type: 'GET',
-        dataType: 'json',
-        cache: false,
-        success: function(response){
-          console.log(response);
-          $('#trial_id').val(response.trial_id);
-          $('#item_code').val(response.item_code);
-          $('#item_name').val(response.item_name);
-          $('#qty_zack').val(response.qty_zack);
-          $('#qty_kg').val(response.qty_kg);
-          $('#edit-material').modal('show');
-        }
-      });
-      });
 
     $('body').on('click', '.deleteData', function () {
      let id1 = $(this).data('id');

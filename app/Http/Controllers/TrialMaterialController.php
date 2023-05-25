@@ -58,15 +58,26 @@ class TrialMaterialController extends Controller
      * @param  \App\Http\Requests\StoreTrial_MaterialRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreTrial_MaterialRequest $request)
+    public function store(Request $request)
     {
-        $material = new Trial_Material();
-        $material->item_code = $request->input('item_code');
-        $material->item_name = $request->input('item_name');
-        $material->qty_zack = $request->input('qty_zack');
-        $material->qty_kg = $request->input('qty_kg');
-        $material->trial_id = $request->input('trial_id');
-        $material->save();
+
+        Trial_Material::updateOrCreate([
+                'id' => $request->id,
+            ],
+            [
+            'item_code' => $request->item_code,
+            'item_name' => $request->item_name,
+            'trial_id' => $request->trial_id,
+            'qty_zack' => $request->qty_zack,
+            'qty_kg' => $request->qty_kg
+        ]);
+        // $material = new Trial_Material();
+        // $material->item_code = $request->input('item_code');
+        // $material->item_name = $request->input('item_name');
+        // $material->qty_zack = $request->input('qty_zack');
+        // $material->qty_kg = $request->input('qty_kg');
+        // $material->trial_id = $request->input('trial_id');
+        // $material->save();
 
         return response()->json(['success'=>'Data berhasil Disimpan.']);
     }
@@ -93,11 +104,8 @@ class TrialMaterialController extends Controller
      */
     public function edit(Request $data)
     {
-        if(request()->ajax())
-        {
-        $data = Trial_Material::find($data->id);
-        return response()->json($data);
-        }
+        $datas = Trial_Material::find($data->id);
+        return response()->json($datas);
         
     }
 
@@ -108,12 +116,19 @@ class TrialMaterialController extends Controller
      * @param  \App\Models\Trial_Material  $trial_Material
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateTrial_MaterialRequest $request, $id)
+    public function update(Request $request, Trial_Material $data)
     {
-        $data= Trial_Material::findOrFail($id);
-        $data->update($request->all());
+        $material= [
+            'trial_id' => $request->trial_id,
+            'item_code' => $request->item_code,
+            'item_name' => $request->item_name,
+            'qty_zack' => $request->qty_zack,
+            'qty_kg' => $request->qty_kg
+        ];
+        Trial_Material::where('id', $data->id)->update($material);
         return response()->json([
-            'success'=>'Data berhasil dirubah. '
+            'success' => true,
+            'message'=>'Data berhasil dirubah. '
         ]);
     }
 
