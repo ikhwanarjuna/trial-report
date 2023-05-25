@@ -43,8 +43,12 @@ Route::post('/logout', [LoginController::class, 'logout']);
 
 //Route::get('/app', [AppsController::class, 'user_list'])->name('app-user-list');
 Route::resource('app', TrialController::class)->middleware(('auth'));
-Route::resource('data/{id?}', TrialMaterialController::class, ['names'=>'material','except'=>'destroy'])->middleware(('auth'));
+// Route::resource('data/{id?}', TrialMaterialController::class, ['names'=>'material'])->except(['destroy','edit','update'])->middleware(('auth'));
+Route::get('data/{id}', [TrialMaterialController::class, 'index'])->middleware(('auth'))->name('material.index');
+Route::post('data/{id}', [TrialMaterialController::class, 'store'])->middleware(('auth'))->name('material.store');
 Route::delete('data/{id?}',[TrialMaterialController::class, 'destroy'])->name('material.destroy')->middleware(('auth'));
+Route::get('data/{id}/edit',[TrialMaterialController::class, 'edit'])->name('material.edit')->middleware(('auth'));
+Route::put('data/update/{id}',[TrialMaterialController::class, 'update'])->name('material.update')->middleware(('auth'));
 
 /* Route Dashboards */
 /* Route Dashboards */

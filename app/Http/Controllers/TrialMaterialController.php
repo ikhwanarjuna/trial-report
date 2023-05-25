@@ -8,6 +8,7 @@ use App\Http\Requests\StoreTrial_MaterialRequest;
 use App\Http\Requests\UpdateTrial_MaterialRequest;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
@@ -90,9 +91,14 @@ class TrialMaterialController extends Controller
      * @param  \App\Models\Trial_Material  $trial_Material
      * @return \Illuminate\Http\Response
      */
-    public function edit(Trial_Material $id)
+    public function edit(Request $data)
     {
-     //
+        if(request()->ajax())
+        {
+        $data = Trial_Material::find($data->id);
+        return response()->json($data);
+        }
+        
     }
 
     /**

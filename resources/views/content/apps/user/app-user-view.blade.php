@@ -220,6 +220,45 @@
               </div>
             </div>
           </div>
+{{-- modal edit --}}
+          <div class="modal modal-slide-in fade" id="edit-material" aria-hidden="true">
+            <div class="modal-dialog sidebar-lg">
+              <div class="modal-content p-0">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">×</button>
+                <div class="modal-header mb-1">
+                  <h5 class="modal-title align-middle" id="modalHeading">
+                    <span class="align-middle">Edit Data</span>
+                  </h5>
+                </div>
+                <div class="modal-body flex-grow-1">
+                  <form id="material-form">
+                    @csrf   
+                      <input type="text" id="trial_id" name="trial_id" class="form-control" value="">                                    
+                    <div class="mb-1">
+                      <label class="form-label">Kode Item</label>
+                      <input type="text" id="item_code" name="item_code" class="form-control" value="">
+                    </div>
+                    <div class="mb-1">
+                      <label class="form-label">Nama Item</label>
+                      <input id="item_name" name="item_name" class="form-control" type="text" value="" />
+                    </div>
+                    <div class="mb-1">
+                      <label class="form-label">Quantity (Zack)</label>
+                      <input class="form-control" id="qty_zack" name="qty_zack" rows="5" type="number" value="">
+                    </div>
+                    <div class="mb-1">
+                      <label class="form-label">Quantity (Kg)</label>
+                      <input class="form-control" id="qty_kg" name="qty_kg" rows="5" type="number" value="">
+                    </div>
+                    <div class="d-flex flex-wrap mb-0">
+                      <button type="submit" class="btn btn-primary me-1" data-bs-dismiss="modal" id="store">Send</button>
+                      <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
       </div>
     </div>
   </div>
@@ -271,7 +310,7 @@
       serverSide : true,
       dataType: 'json',
       ajax: {
-              url: "{{ route('material.index') }}"+'/'+id,
+              url: id,
               type: "GET"
       },
       columns : [
@@ -331,17 +370,17 @@
     $('body').on('click', '.editData', function () {
       var id1 = $(this).data('id');
       $.ajax({
-        url: "{{ route('material.index') }}"+'/'+id1,
+        url: id1+'/edit',
         type: "GET",
+        dataType: 'json',
         cache: false,
         success: function(response){
-          $('#trial_id').val(response.data.trial_id);
-          $('#item_code').val(response.data.item_code);
-          $('#item_name').val(response.data.item_name);
-          $('#qty_zack').val(response.data.qty_zack);
-          $('#qty_kg').val(response.data.qty_kg);
-          $('#tambah-material').modal('show');
-          $('#modalHeading').html("Edit Data");
+          $('#trial_id').val(response.trial_id);
+          $('#item_code').val(response.item_code);
+          $('#item_name').val(response.item_name);
+          $('#qty_zack').val(response.qty_zack);
+          $('#qty_kg').val(response.qty_kg);
+          $('#edit-material').modal('show');
         }
       });
       });
