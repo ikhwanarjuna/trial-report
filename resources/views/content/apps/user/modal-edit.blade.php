@@ -29,7 +29,7 @@
               <input class="form-control" id="qty_kg_edit" name="qty_kg" rows="5" type="number" value="">
             </div>
             <div class="d-flex flex-wrap mb-0">
-              <button type="submit" class="btn btn-primary me-1" data-bs-dismiss="modal" id="store" value="create">Update</button>
+              <button type="submit" class="btn btn-primary me-1" data-bs-dismiss="modal" id="update" value="create">Update</button>
               <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
             </div>
           </form>
@@ -49,53 +49,15 @@
         cache: false,
         success: function(response){
           $('#id').val(response.id);
-          $('#trial_id').val(response.trial_id);
-          $('#item_code').val(response.item_code);
-          $('#item_name').val(response.item_name);
-          $('#qty_zack').val(response.qty_zack);
-          $('#qty_kg').val(response.qty_kg);
-          $('#modalHeading').html("Edit Data");
-          $('#tambah-material').modal('show');
-          $('#store').val("edit-data");
+          $('#trial_id_edit').val(response.trial_id);
+          $('#item_code_edit').val(response.item_code);
+          $('#item_name_edit').val(response.item_name);
+          $('#qty_zack_edit').val(response.qty_zack);
+          $('#qty_kg_edit').val(response.qty_kg);
+          $('#modalHeader').html("Edit Data");
+          $('#edit-material').modal('show');
         }
       });
       });
-    $('#update').click(function(e){
-        let id1 = $(this).data('id');
-        console.log(id1);
-        e.preventDefault();
-        let id = $('#id').val();
-        let trial_id = $('#trial_id_edit').val();
-        let item_code = $('#item_code_edit').val();
-        let item_name = $('#item_name_edit').val();
-        let qty_zack = $('#qty_zack_edit').val();
-        let qty_kg = $('#qty_kg_edit').val();
-        $.ajax({
-            url : 'update/'+id,
-            type: 'PUT',
-            cache: false,
-            data: {
-                "trial_id" : trial_id,
-                "item_code": item_code,
-                "item_name": item_name,
-                "qty_zack": qty_zack,
-                "qty_kg": qty_kg
-            },
-            success:function(response){
-                Swal.fire({
-                    icon: 'success',
-                    title: `${response.message}`,
-                    timer: 3000
-                });
-            },
-            error:function(response){
-                Swal.fire({
-                    icon: 'error',
-                    title: "Data gagal dirubah!.",
-                    timer: 3000
-                });
-            }
-        });
-    });
 
     </script>

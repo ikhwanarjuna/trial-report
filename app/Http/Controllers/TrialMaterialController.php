@@ -125,7 +125,7 @@ class TrialMaterialController extends Controller
             'qty_zack' => $request->qty_zack,
             'qty_kg' => $request->qty_kg
         ];
-        Trial_Material::where('id', $data->id)->update($material);
+        Trial_Material::where('id', $request->id)->update($material);
         return response()->json([
             'success' => true,
             'message'=>'Data berhasil dirubah. '

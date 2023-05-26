@@ -118,87 +118,8 @@
             </tbody>
           </table>
         </div>
-
-        {{-- Modal --}}
-          {{-- <div class="modal modal-slide-in fade" id="tambah-material" aria-hidden="true">
-            <div class="modal-dialog sidebar-lg">
-              <div class="modal-content p-0">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">×</button>
-                <div class="modal-header mb-1">
-                  <h5 class="modal-title align-middle" id="modalHeading">
-                    <span class="align-middle"></span>
-                  </h5>
-                </div>
-                <div class="modal-body flex-grow-1">
-                  <form id="material-form">
-                    @csrf   
-                      <input type="text" id="trial_id" name="trial_id" class="form-control" value="{{ $data->id }}" hidden>                                    
-                    <div class="mb-1">
-                      <label class="form-label">Kode Item</label>
-                      <input type="text" id="item_code" name="item_code" class="form-control">
-                    </div>
-                    <div class="mb-1">
-                      <label class="form-label">Nama Item</label>
-                      <input id="item_name" name="item_name" class="form-control" type="text" />
-                    </div>
-                    <div class="mb-1">
-                      <label class="form-label">Quantity (Zack)</label>
-                      <input class="form-control" id="qty_zack" name="qty_zack" rows="5" type="number">
-                    </div>
-                    <div class="mb-1">
-                      <label class="form-label">Quantity (Kg)</label>
-                      <input class="form-control" id="qty_kg" name="qty_kg" rows="5" type="number">
-                    </div>
-                    <div class="d-flex flex-wrap mb-0">
-                      <button type="submit" class="btn btn-primary me-1" data-bs-dismiss="modal" id="store">Send</button>
-                      <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div> --}}
           @include('content.apps.user.modal-create')
           @include('content.apps.user.modal-edit')
-{{-- modal edit --}}
-          {{-- <div class="modal modal-slide-in fade" id="edit-material" aria-hidden="true">
-            <div class="modal-dialog sidebar-lg">
-              <div class="modal-content p-0">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">×</button>
-                <div class="modal-header mb-1">
-                  <h5 class="modal-title align-middle" id="modalHeader">
-                    <span class="align-middle"></span>
-                  </h5>
-                </div>
-                <div class="modal-body flex-grow-1">
-                  <form id="edit-form">
-                    @csrf   
-                      <input type="text" id="triale_id" name="trial_id" class="form-control" value="">                                    
-                    <div class="mb-1">
-                      <label class="form-label">Kode Item</label>
-                      <input type="text" id="iteme_code" name="item_code" class="form-control" value="">
-                    </div>
-                    <div class="mb-1">
-                      <label class="form-label">Nama Item</label>
-                      <input id="iteme_name" name="item_name" class="form-control" type="text" value="" />
-                    </div>
-                    <div class="mb-1">
-                      <label class="form-label">Quantity (Zack)</label>
-                      <input class="form-control" id="qtye_zack" name="qty_zack" rows="5" type="number" value="">
-                    </div>
-                    <div class="mb-1">
-                      <label class="form-label">Quantity (Kg)</label>
-                      <input class="form-control" id="qtye_kg" name="qty_kg" rows="5" type="number" value="">
-                    </div>
-                    <div class="d-flex flex-wrap mb-0">
-                      <button type="submit" class="btn btn-primary me-1" data-bs-dismiss="modal" id="store">Send</button>
-                      <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div> --}}
       </div>
     </div>
   </div>
@@ -258,6 +179,43 @@
         {data: 'qty_kg', name:'qty_kg'},
         {data: 'action', name:'action', searchable:false, orderable: false}
       ]
+    });
+
+    $('#update').click(function(e){
+        e.preventDefault();
+        let id = $('#id').val();
+        let trial_id = $('#trial_id_edit').val();
+        let item_code = $('#item_code_edit').val();
+        let item_name = $('#item_name_edit').val();
+        let qty_zack = $('#qty_zack_edit').val();
+        let qty_kg = $('#qty_kg_edit').val();
+        $.ajax({
+            url : 'update/'+id,
+            type: 'PUT',
+            cache: false,
+            data: {
+                "trial_id" : trial_id,
+                "item_code": item_code,
+                "item_name": item_name,
+                "qty_zack": qty_zack,
+                "qty_kg": qty_kg
+            },
+            success:function(response){
+                Swal.fire({
+                    icon: 'success',
+                    title: `${response.message}`,
+                    timer: 3000
+                });
+                table.draw();
+            },
+            error:function(response){
+                Swal.fire({
+                    icon: 'error',
+                    title: "Data gagal dirubah!.",
+                    timer: 3000
+                });
+            }
+        });
     });
 
     $('#store').click(function(e){
