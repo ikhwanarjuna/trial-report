@@ -38,7 +38,7 @@ use App\Http\Controllers\AuthenticationController;
 Route::get('/',[LoginController::class, 'index'])->name('login');
 Route::post('/', [LoginController::class, 'authenticate']);
 
-Route::get('/logout', [LoginController::class, 'logout'])->name('logout')->middleware(('auth'));
+Route::get('/logout', [LoginController::class, 'logout']);
 
 
 //Route::get('/app', [AppsController::class, 'user_list'])->name('app-user-list');

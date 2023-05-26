@@ -40,7 +40,6 @@
   <script>
     $('#new-material').click(function () {
       $('#tambah-material').modal('show');
-      // $('#store').val("create-data");
       $('#modalHeading').html("Tambah Material");
        $('#material-form').trigger("reset");
        $('#store').val("create-data");

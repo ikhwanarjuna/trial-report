@@ -344,7 +344,6 @@
     });
     $('#new-data').click(function () {
       $('#new-data-modal').modal('show');
-      // $('#store').val("create-data");
        $('#data-form').trigger("reset");
     });
 

@@ -152,7 +152,6 @@
 @section('page-script')
   {{-- Page js files --}}
   <script src="{{ asset(mix('js/scripts/pages/modal-edit-user.js')) }}"></script>
-  {{-- <script src="{{ asset(mix('js/scripts/pages/app-user-view-account.js')) }}"></script> --}}
   <script src="{{ asset(mix('js/scripts/pages/app-user-view.js')) }}"></script>
   <script>
     $(function(){

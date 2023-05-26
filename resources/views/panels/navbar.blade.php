@@ -58,7 +58,7 @@
     <li class="nav-item d-none d-lg-block"><a class="nav-link nav-link-style"><i class="ficon"
           data-feather="{{ $configData['theme'] === 'dark' ? 'sun' : 'moon' }}"></i></a></li>
     <li class="nav-item dropdown dropdown-user">
-      <a class="nav-link dropdown-toggle dropdown-user-link" id="dropdown-user" href="{{ route('logout') }}"
+      <a class="nav-link dropdown-toggle dropdown-user-link" id="dropdown-user" href="#"
         data-bs-toggle="dropdown" aria-haspopup="true">
         <div class="user-nav d-sm-flex d-none">
           <span class="user-name fw-bolder">

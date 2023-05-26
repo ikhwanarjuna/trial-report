@@ -141,6 +141,6 @@ class TrialMaterialController extends Controller
     public function destroy(Trial_Material $id)
     {
         Trial_Material::destroy($id->id);      
-        return response()->json(['success'=>'Data berhasil dihapus.']);
+        return response()->json(['success'=>'Data Berhasil Dihapus!']);
     }
 }
