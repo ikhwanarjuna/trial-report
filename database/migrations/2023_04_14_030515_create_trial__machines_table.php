@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignUuid('process_id');
             $table->string('machine_number',30);
             $table->foreignUuid('trial_id');
+            $table->timestamps();
         });
     }
 

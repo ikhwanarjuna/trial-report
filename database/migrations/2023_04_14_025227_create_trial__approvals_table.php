@@ -23,6 +23,7 @@ return new class extends Migration
             $table->integer('duration');
             $table->foreignUuid('approve_by');
             $table->date('approve_date');
+            $table->timestamps();
         });
     }
 

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('item_name',255);
             $table->decimal('tonase',10,2)->default(0.00);
             $table->decimal('percentage',10,2)->default(0.00);
+            $table->timestamps();
         });
     }
 

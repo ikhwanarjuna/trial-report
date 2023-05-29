@@ -34,7 +34,7 @@ class TrialController extends Controller
                 ->make(true);
         }
         
-        return view('content.apps.user.app-user-list');
+        return view('content.apps.user.master-list');
         
 
         // $pageConfigs = ['pageHeader' => false];

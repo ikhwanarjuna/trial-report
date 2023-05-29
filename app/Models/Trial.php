@@ -27,6 +27,10 @@ class Trial extends Model
     public function trial_machine(){
         return $this->hasMany(Trial_Machine::class);
     }
+    public function composition(){
+        return $this->hasMany(Composition::class);
+    }
+
     public function resolveRouteBinding($value, $field = null)
     {
         return $this->whereid($value, $field)->firstOrFail();

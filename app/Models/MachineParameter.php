@@ -10,4 +10,8 @@ class MachineParameter extends Model
 {
     use HasFactory;
     use Uuid;
+
+    public function trial_machine(){
+        return $this->belongsTo(TrialMachine::class);
+    }
 }

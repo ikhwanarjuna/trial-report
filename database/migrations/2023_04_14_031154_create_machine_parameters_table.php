@@ -19,6 +19,7 @@ return new class extends Migration
             $table->decimal('parameter',10,2);
             $table->decimal('ampere',10,2);
             $table->foreignUuid('trial_machine_id');
+            $table->timestamps();
         });
     }
 

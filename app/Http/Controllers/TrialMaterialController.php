@@ -34,7 +34,7 @@ class TrialMaterialController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
     }
-        return view('content.apps.user.app-user-view',[
+        return view('content.apps.user.data-material-view',[
             $data = Trial::where('id', $request->id)->first(),
             'data'=> $data,
             // 'material' => $material,

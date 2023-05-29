@@ -21,6 +21,12 @@ use App\Http\Controllers\MiscellaneousController;
 use App\Http\Controllers\TrialMaterialController;
 use App\Http\Controllers\UserInterfaceController;
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\CompositionController;
+use App\Http\Controllers\ProcessController;
+use App\Http\Controllers\TrialMachineController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserListController;
+use App\Models\Composition;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,17 +44,25 @@ use App\Http\Controllers\AuthenticationController;
 Route::get('/',[LoginController::class, 'index'])->name('login');
 Route::post('/', [LoginController::class, 'authenticate']);
 
-Route::get('/logout', [LoginController::class, 'logout']);
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
-//Route::get('/app', [AppsController::class, 'user_list'])->name('app-user-list');
 Route::resource('app', TrialController::class)->middleware(('auth'));
-// Route::resource('data/{id?}', TrialMaterialController::class, ['names'=>'material'])->except(['destroy','edit','update'])->middleware(('auth'));
 Route::get('data/{id}', [TrialMaterialController::class, 'index'])->middleware(('auth'))->name('material.index');
 Route::post('data/{id}', [TrialMaterialController::class, 'store'])->middleware(('auth'))->name('material.store');
 Route::delete('data/{id?}',[TrialMaterialController::class, 'destroy'])->name('material.destroy')->middleware(('auth'));
 Route::get('data/{id}/edit',[TrialMaterialController::class, 'edit'])->name('material.edit')->middleware(('auth'));
 Route::put('data/update/{id}',[TrialMaterialController::class, 'update'])->name('material.update')->middleware(('auth'));
+Route::resource('user', UserListController::class)->middleware(('auth'));
+Route::get('data/composition/{id}', [CompositionController::class, 'index'])->name('composition.index')->middleware(('auth'));
+Route::post('data/composition/{id}', [CompositionController::class, 'store'])->name('composition.store')->middleware(('auth'));
+Route::delete('composition/{id?}', [CompositionController::class, 'destroy'])->name('composition.destroy')->middleware(('auth'));
+Route::get('data/composition/{id}/edit',[CompositionController::class, 'edit'])->name('composition.edit')->middleware(('auth'));
+Route::put('data/composition/update/{id}',[CompositionController::class, 'update'])->name('composition.update')->middleware(('auth'));
+Route::resource('proses', ProcessController::class)->middleware(('auth'));
+Route::get('data/machine/{id}', [TrialMachineController::class, 'index'])->name('machine.index')->middleware(('auth'));
+Route::post('data/machine/{id}', [TrialMachineController::class, 'store'])->name('machine.store')->middleware(('auth'));
+Route::delete('machine/{id?}', [TrialMachineController::class, 'destroy'])->name('machine.destroy')->middleware(('auth'));
 
 /* Route Dashboards */
 /* Route Dashboards */

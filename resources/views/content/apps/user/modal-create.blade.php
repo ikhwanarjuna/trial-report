@@ -10,7 +10,7 @@
         <div class="modal-body flex-grow-1">
           <form id="material-form">
             @csrf
-              <input type="text" id="trial_id" name="trial_id" class="form-control" value="{{ $data->id }}">                                    
+              <input type="text" id="trial_id" name="trial_id" class="form-control" value="{{ $data->id }}" hidden>                                    
             <div class="mb-1">
               <label class="form-label">Kode Item</label>
               <input type="text" id="item_code" name="item_code" class="form-control">

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->decimal('waste_target_in_percent',10,2);
             $table->decimal('ampere',10,2);
             $table->string('operator_number',255);
+            $table->timestamps();
         });
     }
 
