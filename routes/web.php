@@ -63,6 +63,7 @@ Route::resource('proses', ProcessController::class)->middleware(('auth'));
 Route::get('data/machine/{id}', [TrialMachineController::class, 'index'])->name('machine.index')->middleware(('auth'));
 Route::post('data/machine/{id}', [TrialMachineController::class, 'store'])->name('machine.store')->middleware(('auth'));
 Route::delete('machine/{id?}', [TrialMachineController::class, 'destroy'])->name('machine.destroy')->middleware(('auth'));
+Route::post('data/machine/param/{id}',[TrialMachineController::class, 'stores'])->name('param.stores')->middleware(('auth'));
 
 /* Route Dashboards */
 /* Route Dashboards */

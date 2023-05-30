@@ -88,7 +88,7 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{ route('machine.index',$data->id) }}">
-            <i data-feather="bell" class="font-medium-1 me-50"></i><span class="fw-bold">Trial Machine</span>
+            <i data-feather="zap" class="font-medium-1 me-50"></i><span class="fw-bold">Trial Machine</span>
           </a>
         </li>
         <li class="nav-item">

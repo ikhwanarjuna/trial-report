@@ -21,6 +21,6 @@ class Trial_Machine extends Model
         return $this->hasMany(Process::class);
     }
     public function machine_parameter(){
-        return $this->hasMany(Machine_Parameter::class);
+        return $this->hasMany(MachineParameter::class);
     }
 }

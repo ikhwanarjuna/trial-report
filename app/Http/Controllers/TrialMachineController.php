@@ -19,8 +19,9 @@ class TrialMachineController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {
-        $param = MachineParameter::latest()->where('trial_machine_id', $request->id)->get();
+    {   
+        $id = Trial_Machine::where('trial_id', $request->id)->first();
+        $param = MachineParameter::latest()->where('trial_machine_id', $id->id)->get();
         if ($request->ajax()){
             return DataTables::of($param)
                 ->addIndexColumn()
@@ -30,7 +31,9 @@ class TrialMachineController extends Controller
                     return $btn;
                 })
                 ->rawColumns(['action'])
-                ->make(true);    }
+                ->make(true);    
+            }
+            
 
         return view('content.apps.user.trial-machine',[
             $data = Trial::where('id', $request->id)->first(),
@@ -70,6 +73,21 @@ class TrialMachineController extends Controller
         'trial_id' => $request->trial_id,
     ]);  
         return response()->json(['success'=>'Data berhasil Disimpan.']);
+    }
+
+    public function stores(Request $request)
+    {
+        MachineParameter::updateOrCreate([
+            'id' => $request->id,
+        ],
+        [
+            'name'=> $request->name,
+            'trial_machine_id'=> $request->trial_machine_id,
+            'parameter' => $request->parameter,
+            'ampere' => $request->ampere
+        ]);
+
+        return response()->json(['success'=> 'Data Berhasil Ditambah!']);
     }
 
     /**

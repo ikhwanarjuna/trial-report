@@ -10,7 +10,11 @@
         <div class="modal-body flex-grow-1">
           <form id="material-form">
             @csrf
-              <input type="text" id="trial_machine_id" name="trial_machine_id" class="form-control" value="{{ $mesin->id }}" hidden>                                    
+            <select class="form-select" name="trial_machine_id" id="trial_machine_id">
+              @foreach ($mesin as $mosin)
+              <option value="{{ $mosin->id }}">{{ $mosin->machine_number }}</option>
+              @endforeach
+            </select>                                    
             <div class="mb-1">
               <label class="form-label">Setting</label>
               <input type="text" id="name" name="name" class="form-control">
@@ -34,7 +38,7 @@
   </div>
 
   <script>
-    $('#new-material').click(function () {
+    $('.tambahParam').click(function () {
       $('#tambah-param').modal('show');
       $('#modalHeading').html("Machine Parameter");
        $('#material-form').trigger("reset");

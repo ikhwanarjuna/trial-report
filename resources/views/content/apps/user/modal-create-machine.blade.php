@@ -20,8 +20,8 @@
               <select class="form-select" name="process_id" id="process_id">
                 @foreach ($proses as $pros)
                 <option value="{{ $pros->id }}">{{ $pros->name }}</option>
-              </select>
                 @endforeach
+              </select>
             </div>
             <div class="d-flex flex-wrap mb-0">
               <button type="submit" class="btn btn-primary me-1" data-bs-dismiss="modal" id="store" value="create">Send</button>

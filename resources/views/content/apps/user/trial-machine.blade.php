@@ -88,7 +88,7 @@
         </li>
         <li class="nav-item">
           <a class="nav-link active" href="{{ route('machine.index',$data->id) }}">
-            <i data-feather="bell" class="font-medium-1 me-50"></i><span class="fw-bold">Trial Machine</span>
+            <i data-feather="zap" class="font-medium-1 me-50"></i><span class="fw-bold">Trial Machine</span>
           </a>
         </li>
         <li class="nav-item">
@@ -108,6 +108,7 @@
             <thead>
               <b>Nomor Mesin: {{ $msn->machine_number }}</b>
               <a href="javascript:void(0)" data-toggle="tooltip"  data-id="{{ $msn->id }}" data-original-title="Delete" class="btn btn-danger mx-1 btn-sm deleteData">Delete</a>
+              <a href="javascript:void(0)" data-toggle="tooltip"  class="btn btn-success btn-sm tambahParam">Tambah Parameter</a>
               <tr>
                 <th>No</th>
                 <th>Setting</th>
@@ -122,6 +123,7 @@
           @endforeach
         </div>
           @include('content.apps.user.modal-create-machine')
+          @include('content.apps.user.modal-create-param')
       </div>
     </div>
   </div>
@@ -234,6 +236,42 @@
         },
         success:function(response){
         location.reload();
+      },
+      error:function(response){
+        Swal.fire({
+          icon: 'error',
+          title: "Data Gagal Tersimpan.",
+          showConfirmButton: false,
+          timer : 3000
+        });
+      },
+      });
+    });
+
+    $('#storeparam').click(function(e){
+      e.preventDefault();
+      let trial_machine_id = $('#trial_machine_id').val();
+      let name = $('#name').val();
+      let parameter = $('#parameter').val();
+      let ampere = $('#ampere').val();
+      $.ajax({
+        url : `{{ route('param.stores', $data->id) }}`,
+        type: "POST",
+        dataType: 'json',
+        data: {
+          "trial_machine_id" : trial_machine_id,
+          "name" : name,
+          "parameter" : parameter,
+          "ampere" : ampere,
+        },
+        success:function(response){
+        Swal.fire({
+          icon: 'success',
+          title : "Data berhasil Ditambahkan",
+          showConfirmButton : false,
+          timer : 3000
+        });
+        table.draw();
       },
       error:function(response){
         Swal.fire({
