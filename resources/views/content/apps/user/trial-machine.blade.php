@@ -92,7 +92,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{asset('app/user/view/connections')}}">
+          <a class="nav-link" href="{{ route('acceptance.index', $data->id) }}">
             <i data-feather="link" class="font-medium-1 me-50"></i><span class="fw-bold">Acceptance</span>
           </a>
         </li>
@@ -124,6 +124,7 @@
         </div>
           @include('content.apps.user.modal-create-machine')
           @include('content.apps.user.modal-create-param')
+          @include('content.apps.user.modal-edit-param')
       </div>
     </div>
   </div>
@@ -186,21 +187,19 @@
     $('#update').click(function(e){
         e.preventDefault();
         let id = $('#id').val();
-        let trial_id = $('#trial_id_edit').val();
-        let item_code = $('#item_code_edit').val();
-        let item_name = $('#item_name_edit').val();
-        let qty_zack = $('#qty_zack_edit').val();
-        let qty_kg = $('#qty_kg_edit').val();
+        let trial_machine_id = $('#trial_machine_id_edit').val();
+        let name = $('#name_edit').val();
+        let parameter = $('#parameter_edit').val();
+        let ampere = $('#ampere_edit').val();
         $.ajax({
             url : 'update/'+id,
             type: 'PUT',
             cache: false,
             data: {
-                "trial_id" : trial_id,
-                "item_code": item_code,
-                "item_name": item_name,
-                "qty_zack": qty_zack,
-                "qty_kg": qty_kg
+                "trial_machine_id" : trial_machine_id,
+                "name": name,
+                "parameter": parameter,
+                "ampere": ampere
             },
             success:function(response){
                 Swal.fire({

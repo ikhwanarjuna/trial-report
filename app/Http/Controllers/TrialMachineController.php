@@ -107,9 +107,10 @@ class TrialMachineController extends Controller
      * @param  \App\Models\Trial_Machine  $trial_Machine
      * @return \Illuminate\Http\Response
      */
-    public function edit(Trial_Machine $trial_Machine)
+    public function edit(Request $param)
     {
-        //
+        $datas =MachineParameter::find($param->id);
+        return response()->json($datas);
     }
 
     /**
@@ -121,7 +122,17 @@ class TrialMachineController extends Controller
      */
     public function update(UpdateTrial_MachineRequest $request, Trial_Machine $trial_Machine)
     {
-        //
+        $param= [
+            'trial_machine_id' => $request->trial_machine_id,
+            'name' => $request->name,
+            'parameter' => $request->parameter,
+            'ampere' => $request->ampere
+        ];
+        MachineParameter::where('id', $request->id)->update($param);
+        return response()->json([
+            'success' => true,
+            'message'=>'Data berhasil dirubah. '
+        ]);
     }
 
     /**
@@ -133,6 +144,12 @@ class TrialMachineController extends Controller
     public function destroy($id)
     {
         Trial_Machine::destroy($id);      
+        return response()->json(['success'=>'Data Berhasil Dihapus!']);
+    }
+
+    public function delete($id)
+    {
+        MachineParameter::destroy($id);
         return response()->json(['success'=>'Data Berhasil Dihapus!']);
     }
 }

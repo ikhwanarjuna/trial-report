@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AcceptanceController;
 use App\Http\Controllers\DataView;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -64,6 +65,11 @@ Route::get('data/machine/{id}', [TrialMachineController::class, 'index'])->name(
 Route::post('data/machine/{id}', [TrialMachineController::class, 'store'])->name('machine.store')->middleware(('auth'));
 Route::delete('machine/{id?}', [TrialMachineController::class, 'destroy'])->name('machine.destroy')->middleware(('auth'));
 Route::post('data/machine/param/{id}',[TrialMachineController::class, 'stores'])->name('param.stores')->middleware(('auth'));
+Route::get('data/machine/{id}/edit',[TrialMachineController::class, 'edit'])->name('param.edit')->middleware(('auth'));
+Route::delete('param/{id?}',[TrialMachineController::class, 'delete'])->name('param.delete')->middleware(('auth'));
+Route::put('data/machine/update/{id}',[TrialMachineController::class, 'update'])->name('param.update')->middleware(('auth'));
+Route::get('data/acceptance/{id}', [AcceptanceController::class, 'index'])->name('acceptance.index')->middleware(('auth'));
+Route::post('data/acceptance/{id}',[AcceptanceController::class, 'store'])->name('acceptance.store')->middleware(('auth'));
 
 /* Route Dashboards */
 /* Route Dashboards */

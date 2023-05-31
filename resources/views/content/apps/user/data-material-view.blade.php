@@ -92,7 +92,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{asset('app/user/view/connections')}}">
+          <a class="nav-link" href="{{ route('acceptance.index', $data->id) }}">
             <i data-feather="link" class="font-medium-1 me-50"></i><span class="fw-bold">Acceptance</span>
           </a>
         </li>
