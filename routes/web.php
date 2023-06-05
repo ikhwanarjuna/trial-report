@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AcceptanceController;
+use App\Http\Controllers\AcceptanceResultController;
 use App\Http\Controllers\DataView;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -61,6 +62,7 @@ Route::delete('composition/{id?}', [CompositionController::class, 'destroy'])->n
 Route::get('data/composition/{id}/edit',[CompositionController::class, 'edit'])->name('composition.edit')->middleware(('auth'));
 Route::put('data/composition/update/{id}',[CompositionController::class, 'update'])->name('composition.update')->middleware(('auth'));
 Route::resource('proses', ProcessController::class)->middleware(('auth'));
+Route::resource('criteria', AcceptanceController::class)->middleware(('auth'));
 Route::get('data/machine/{id}', [TrialMachineController::class, 'index'])->name('machine.index')->middleware(('auth'));
 Route::post('data/machine/{id}', [TrialMachineController::class, 'store'])->name('machine.store')->middleware(('auth'));
 Route::delete('machine/{id?}', [TrialMachineController::class, 'destroy'])->name('machine.destroy')->middleware(('auth'));
@@ -68,8 +70,10 @@ Route::post('data/machine/param/{id}',[TrialMachineController::class, 'stores'])
 Route::get('data/machine/{id}/edit',[TrialMachineController::class, 'edit'])->name('param.edit')->middleware(('auth'));
 Route::delete('param/{id?}',[TrialMachineController::class, 'delete'])->name('param.delete')->middleware(('auth'));
 Route::put('data/machine/update/{id}',[TrialMachineController::class, 'update'])->name('param.update')->middleware(('auth'));
-Route::get('data/acceptance/{id}', [AcceptanceController::class, 'index'])->name('acceptance.index')->middleware(('auth'));
-Route::post('data/acceptance/{id}',[AcceptanceController::class, 'store'])->name('acceptance.store')->middleware(('auth'));
+Route::get('data/acceptance/{id}', [AcceptanceResultController::class, 'index'])->name('acceptance.index')->middleware(('auth'));
+Route::post('data/acceptance/{id}',[AcceptanceResultController::class, 'store'])->name('acceptance.store')->middleware(('auth'));
+Route::get('data/acceptance/result/{id}', [AcceptanceResultController::class, 'getAcceptanceResult'])->name('acceptance.result')->middleware(('auth'));
+Route::post('data/acceptance/result/{id}', [AcceptanceResultController::class, 'stores'])->name('acceptance.stores')->middleware(('auth'));
 
 /* Route Dashboards */
 /* Route Dashboards */

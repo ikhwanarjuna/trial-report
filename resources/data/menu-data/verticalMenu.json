@@ -20,6 +20,12 @@
       "url": "/proses"
     },
     {
+      "name": "Criteria",
+      "icon": "circle",
+      "slug": "",
+      "url": "/criteria"
+    },
+    {
     "name": "User",
     "icon": "user",
     "slug": "",

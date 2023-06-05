@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('acceptance__results', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('criteria_id');
+            $table->foreignUuid('criteria_id');
+            $table->foreignUuid('trial_id');
             $table->string('standart',255);
             $table->string('actual',255);
             $table->boolean('approved')->default(false);

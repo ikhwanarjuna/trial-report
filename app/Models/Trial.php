@@ -30,6 +30,9 @@ class Trial extends Model
     public function composition(){
         return $this->hasMany(Composition::class);
     }
+    public function acceptance_result(){
+        return $this->hasMany(Acceptance_Result::class);
+    }
 
     public function resolveRouteBinding($value, $field = null)
     {

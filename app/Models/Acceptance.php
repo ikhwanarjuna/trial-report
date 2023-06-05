@@ -8,6 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Acceptance extends Model
 {
+
+    protected $guarded = ['id'];
+
+    public function acceptance_result(){
+    return $this->belongsTo(AcceptanceResult::class);
+    }
     use HasFactory;
     use Uuid;
 }

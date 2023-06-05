@@ -1,6 +1,6 @@
 @extends('layouts/contentLayoutMaster')
 
-@section('title', 'List Proses')
+@section('title', 'Criteria List')
 
 @section('vendor-style')
   {{-- Page Css files --}}
@@ -26,9 +26,9 @@
   <!-- list and filter start -->
   <div class="card">
     <div class="card-body border-bottom">
-      <h4 class="card-title">Process List</h4>
+      <h4 class="card-title">Criteria List</h4>
       <div class="row">
-        <div class="col-md-4 user_role"><a href="javascript:void(0)" class="btn btn-success" id="new-data">New Process</a></div>
+        <div class="col-md-4 user_role"><a href="javascript:void(0)" class="btn btn-success" id="new-data">New Criteria</a></div>
         <div class="col-md-4 user_plan"></div>
         <div class="col-md-4 user_status"></div>
       </div>
@@ -39,8 +39,7 @@
         <thead class="table-light">
           <tr>
             <th>No</th>
-            <th>Nama Proses</th>
-            <th>Sequence</th>
+            <th>Kriteria</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -60,7 +59,7 @@
                     <div class="modal-dialog modal-lg">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h4 class="modal-title" id="modalHeading">Tambah Proses</h4>
+                          <h4 class="modal-title" id="modalHeading">Tambah Kriteria</h4>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                           
@@ -69,14 +68,10 @@
                             @csrf
                             <div class="row">
                               <div class="col mb-1 form-group">
-                              <label>Nama Proses</label>
-                              <input type="text" placeholder="Nama Proses" id="name" name="name" class="form-control" required >
+                              <label>Kriteria</label>
+                              <input type="text" placeholder="Kriteria" id="name" name="name" class="form-control" required >
                             </div>
-                            </div>
-                            <div class="col mb-1 form-group">    
-                                <label>Sequence</label>
-                                <input type="number" placeholder="Sequence" id="sequence" name="sequence" class="form-control" required>
-                              </div>                            
+                            </div>                            
                             <div class="modal-footer">
                               <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" name="store" id="store">Simpan</button>
                             </div>
@@ -97,7 +92,7 @@
                     <div class="modal-dialog modal-lg">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h4 class="modal-title" id="modalHeading">Edit Proses</h4>
+                          <h4 class="modal-title" id="modalHeading">Edit Criteria</h4>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                           
@@ -107,14 +102,10 @@
                             <div class="row">
                             <input type="text" id="id" name="id" class="form-control" value="" hidden>
                               <div class="col mb-1 form-group">
-                              <label>Nama Proses</label>
+                              <label>Kriteria</label>
                               <input type="text" placeholder="Nama Proses" id="name_edit" name="name" class="form-control" required >
                             </div>
-                            </div>
-                            <div class="col mb-1 form-group">    
-                                <label>Sequence</label>
-                                <input type="number" placeholder="Sequence" id="sequence_edit" name="sequence" class="form-control" required>
-                              </div>                            
+                            </div>                            
                             <div class="modal-footer">
                               <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" id="update">Simpan</button>
                             </div>
@@ -170,11 +161,10 @@
     var table = $('.data-table').DataTable({
       processing: true,
       serverSide: true,
-      ajax: "{{ route('proses.index') }}",
+      ajax: "{{ route('criteria.index') }}",
       columns:[
         {data:'DT_RowIndex',name:'DT_RowIndex'},
         {data:'name',name:'name'},
-        {data:'sequence',name:'sequence'},
         {data:'action',name:'action',orderable:false, searchable: false},
         
       ]
@@ -189,20 +179,18 @@
     
 
     let name = $('#name').val();
-    let sequence = $('#sequence').val();
 
     $.ajax({
-      url: "{{ route('proses.store') }}",
+      url: "{{ route('criteria.store') }}",
       type: "POST",
       dataType: 'json',
       data: {
         "name" : name,
-        "sequence" : sequence,
       },
       success:function(response){
         Swal.fire({
           icon: 'success',
-          title : `${response.message}`,
+          title : "Data Berhasil Tersimpan.",
           showConfirmButton : false,
           timer : 3000
         });
@@ -223,14 +211,13 @@
       let id1 = $(this).data('id');
       console.log(id1);
       $.ajax({
-        url: 'proses/'+id1+'/edit',
+        url: 'criteria/'+id1+'/edit',
         type: 'GET',
         dataType: 'json',
         cache: false,
         success: function(response){
           $('#id').val(response.id);
           $('#name_edit').val(response.name);
-          $('#sequence_edit').val(response.sequence);
           $('#edit-modal').modal('show');
         }
       });
@@ -240,19 +227,17 @@
         e.preventDefault();
         let id = $('#id').val();
         let name = $('#name_edit').val();
-        let sequence = $('#sequence_edit').val();
         $.ajax({
-            url : 'proses/'+id,
+            url : 'criteria/'+id,
             type: 'PUT',
             cache: false,
             data: {
                 "name" : name,
-                "sequence": sequence,
             },
             success:function(response){
                 Swal.fire({
                     icon: 'success',
-                    title: `${response.message}`,
+                    title: `${response.success}`,
                     timer: 3000
                 });
                 table.draw();
@@ -276,7 +261,7 @@
      if(result){
      $.ajax({
          type: "DELETE",
-         url: "{{ route('proses.store') }}"+'/'+id,
+         url: "{{ route('criteria.store') }}"+'/'+id,
          success: function (data) {
           Swal.fire({
           type : 'success',

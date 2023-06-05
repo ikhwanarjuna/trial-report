@@ -24,7 +24,7 @@
   <div class="row">
     <!-- User Sidebar -->
     <div class="col-xl-4 col-lg-5 col-md-5 order-1 order-md-0">
-      <div class="col mb-2 md-4"><a href="javascript:void(0)" class="btn btn-success" id="new-material">Tambah Material</a></div>
+      {{-- <div class="col mb-2 md-4"><a href="javascript:void(0)" class="btn btn-success" id="new-material">Tambah Material</a></div> --}}
       <!-- User Card -->
       <div class="card">
         <div class="card-body"> 
@@ -105,6 +105,7 @@
         <div class="table-responsive">
           <table class="table datatable-project">
             <thead>
+              <a href="javascript:void(0)" data-toggle="tooltip"  class="btn btn-success btn-sm" id="new-material">Tambah Hasil</a>
               <tr>
                 <th>No</th>
                 <th>Hasil/Shift(Kg)</th>
@@ -123,6 +124,7 @@
         <div class="table-responsive">
           <table class="table datatable-acceptance">
             <thead>
+              <a href="javascript:void(0)" data-toggle="tooltip"  class="btn btn-success btn-sm" id="tambah-result">Tambah Acceptance</a>
               <tr>
                 <th>No</th>
                 <th>Kriteria</th>
@@ -137,7 +139,7 @@
           </table>
         </div>
           @include('content.apps.user.modal-create-acc')
-          @include('content.apps.user.modal-edit')
+          @include('content.apps.user.modal-create-result')
       </div>
     </div>
   </div>
@@ -180,7 +182,7 @@
     });
     var url = window.location.pathname;
     var id = url.substring(url.lastIndexOf('/') + 1);
-    var table = $('.datatable-project').DataTable({
+    var table1 = $('.datatable-project').DataTable({
       processing : true,
       serverSide : true,
       dataType: 'json',
@@ -199,20 +201,20 @@
       ]
     });
 
-    var table = $('.datatable-acceptance').DataTable({
+    var table2 = $('.datatable-acceptance').DataTable({
       processing : true,
       serverSide : true,
       dataType: 'json',
       ajax: {
-              url: id,
+              url: `{{ route('acceptance.result', $data->id) }}`,
               type: "GET"
       },
       columns : [
         {data: 'DT_RowIndex', name:'DT_RowIndex'},
-        {data: 'item_code', name:'item_code'},
-        {data: 'item_name', name:'item_name'},
-        {data: 'qty_zack', name:'qty_zack'},
-        {data: 'qty_kg', name:'qty_kg'},
+        {data: 'criteria_id', name:'criteria_id'},
+        {data: 'standart', name:'standart'},
+        {data: 'actual', name:'actual'},
+        {data: 'approved', name:'approved'},
         {data: 'action', name:'action', searchable:false, orderable: false}
       ]
     });
@@ -273,6 +275,44 @@
           "waste_target_in_percent" : waste_target_in_percent,
           "ampere": ampere,
           "operator_number": operator_number
+        },
+        success:function(response){
+        Swal.fire({
+          icon: 'success',
+          title : "Data berhasil Ditambahkan",
+          showConfirmButton : false,
+          timer : 3000
+        });
+        table.draw();
+      },
+      error:function(response){
+        Swal.fire({
+          icon: 'error',
+          title: "Data Gagal Tersimpan.",
+          showConfirmButton: false,
+          timer : 3000
+        });
+      },
+      });
+    });
+
+    $('#storeRes').click(function(e){
+      e.preventDefault();
+      let trial_id = $('#trial_id').val();
+      let criteria_id = $('#criteria_id').val();
+      let standart= $('#standart').val();
+      let actual = $('#actual').val();
+      let approved = $('#approved').val();
+      $.ajax({
+        url : "{{ route('acceptance.stores', $data->id) }}",
+        type: "POST",
+        dataType: 'json',
+        data: {
+          "trial_id" : trial_id,
+          "criteria_id" : criteria_id,
+          "standart" : standart,
+          "actual" : actual,
+          "approved": approved
         },
         success:function(response){
         Swal.fire({

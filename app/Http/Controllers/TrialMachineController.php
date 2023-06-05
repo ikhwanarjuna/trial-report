@@ -21,7 +21,7 @@ class TrialMachineController extends Controller
     public function index(Request $request)
     {   
         $id = Trial_Machine::where('trial_id', $request->id)->first();
-        $param = MachineParameter::latest()->where('trial_machine_id', $id->id)->get();
+        $param = MachineParameter::latest()->where('trial_machine_id', $id?->id)->get();
         if ($request->ajax()){
             return DataTables::of($param)
                 ->addIndexColumn()
