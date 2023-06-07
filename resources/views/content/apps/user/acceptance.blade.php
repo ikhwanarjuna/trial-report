@@ -140,6 +140,8 @@
         </div>
           @include('content.apps.user.modal-create-acc')
           @include('content.apps.user.modal-create-result')
+          @include('content.apps.user.modal-edit-acc')
+          @include('content.apps.user.modal-edit-result')
       </div>
     </div>
   </div>
@@ -222,21 +224,23 @@
     $('#update').click(function(e){
         e.preventDefault();
         let id = $('#id').val();
-        let trial_id = $('#trial_id_edit').val();
-        let item_code = $('#item_code_edit').val();
-        let item_name = $('#item_name_edit').val();
-        let qty_zack = $('#qty_zack_edit').val();
-        let qty_kg = $('#qty_kg_edit').val();
+        let trial_machine_id = $('#trial_machine_id_edit').val();
+        let result_per_shift_in_kg = $('#result_per_shift_in_kg_edit').val();
+        let waste_in_kg = $('#waste_in_kg_edit').val();
+        let waste_target_in_percent = $('#waste_target_in_percent_edit').val();
+        let ampere = $('#ampere_edit').val();
+        let operator_number = $('#operator_number_edit').val();
         $.ajax({
             url : 'update/'+id,
             type: 'PUT',
             cache: false,
             data: {
-                "trial_id" : trial_id,
-                "item_code": item_code,
-                "item_name": item_name,
-                "qty_zack": qty_zack,
-                "qty_kg": qty_kg
+                "trial_machine_id" : trial_machine_id,
+                "result_per_shift_in_kg": result_per_shift_in_kg,
+                "waste_in_kg": waste_in_kg,
+                "waste_target_in_percent": waste_target_in_percent,
+                "ampere": ampere,
+                "operator_number": operator_number
             },
             success:function(response){
                 Swal.fire({
@@ -341,7 +345,7 @@
      if(result){
      $.ajax({
          type: "DELETE",
-         url:  "{{ route('material.destroy') }}"+'/'+id1,
+         url:  "{{ route('acceptance.destroy') }}"+'/'+id1,
          cache: false,
          success: function (data) {
           Swal.fire({
@@ -360,7 +364,35 @@
  }else{
   return false;
  }
- });   
+ }); 
+ 
+ $('body').on('click', '.deleteResult', function () {
+     let id1 = $(this).data('id');
+     var result= confirm("Apakah yakin menghapus data?");
+     
+     if(result){
+     $.ajax({
+         type: "DELETE",
+         url:  "{{ route('acceptance.delete') }}"+'/'+id1,
+         cache: false,
+         success: function (data) {
+          Swal.fire({
+          type : 'success',
+          icon: 'success',
+          title : "Data Berhasil Dihapus.",
+          showConfirmButton : false,
+          timer : 3000
+        });
+             table.draw();
+         },
+         error: function (data) {
+             console.log('Error:', data);
+         }
+     });
+ }else{
+  return false;
+ }
+ });
 
   });
     </script>

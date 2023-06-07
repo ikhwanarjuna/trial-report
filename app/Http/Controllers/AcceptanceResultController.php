@@ -128,9 +128,16 @@ class AcceptanceResultController extends Controller
      * @param  \App\Models\Acceptance_Result  $acceptance_Result
      * @return \Illuminate\Http\Response
      */
-    public function edit(Acceptance_Result $acceptance_Result)
+    public function edit($id)
     {
-        //
+        $datas = Trial_Machine_Result::find($id);
+        return response()->json($datas);
+    }
+
+    public function edits($id)
+    {
+        $datas = Acceptance_Result::find($id);
+        return response()->json($datas);
     }
 
     /**
@@ -140,9 +147,21 @@ class AcceptanceResultController extends Controller
      * @param  \App\Models\Acceptance_Result  $acceptance_Result
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateAcceptance_ResultRequest $request, Acceptance_Result $acceptance_Result)
+    public function update(Request $request, $id)
     {
-        //
+        $result= [
+            'trial_machine_id' => $request->trial_machine_id,
+            'result_per_shift_in_kg' => $request->result_per_shift_in_kg,
+            'waste_in_kg' => $request->waste_in_kg,
+            'waste_target_in_percent' => $request->waste_target_in_percent,
+            'ampere' => $request->ampere,
+            'operator_number' => $request->operator_number
+        ];
+        Trial_Machine_Result::where('id', $id)->update($result);
+        return response()->json([
+            'success' => true,
+            'message'=>'Data berhasil dirubah. '
+        ]);
     }
 
     /**
@@ -151,8 +170,14 @@ class AcceptanceResultController extends Controller
      * @param  \App\Models\Acceptance_Result  $acceptance_Result
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Acceptance_Result $acceptance_Result)
+    public function destroy($id)
     {
-        //
+        Trial_Machine_Result::find($id)->delete();
+        return response()->json(['success'=>'Data berhasil dihapus.']);
+    }
+    public function delete($id)
+    {
+        Acceptance_Result::find($id)->delete();
+        return response()->json(['success'=>'Data berhasil dihapus.']);
     }
 }

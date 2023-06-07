@@ -56,7 +56,7 @@
     $('#new-material').click(function () {
       $('#tambah-hasil').modal('show');
       $('#modalHeading').html("Tambah Hasil");
-       $('#material-form').trigger("reset");
+       $('#material-form').trigger("reset");  
        $('#store').val("create-data");
     });
     
